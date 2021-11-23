@@ -21,7 +21,7 @@ public class Ciclo {
 	private String tipo;
 	
 	@OneToMany(mappedBy="ciclo", orphanRemoval=true)
-	private List<Noticia> noticia = new ArrayList<>();
+	private List<Noticia> noticias = new ArrayList<>();
 	
 	@OneToMany(mappedBy="ciclo", orphanRemoval=true)
 	private List<Alumno> alumnos = new ArrayList<>();

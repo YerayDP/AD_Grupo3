@@ -24,8 +24,6 @@ public class RRHH {
 	
 	private String password;
 	
-	private String String;
-	
 	private String empresa;
 	
 	@OneToMany(mappedBy="rrhh", orphanRemoval=true)
@@ -39,7 +37,6 @@ public class RRHH {
 		this.apellidos = apellidos;
 		this.email = email;
 		this.password = password;
-		String = string;
 		this.empresa = empresa;
 	}
 
