@@ -24,12 +24,10 @@ public class RRHH {
 	
 	private String password;
 	
-	private String String;
-	
 	private String empresa;
 	
 	@OneToMany(mappedBy="rrhh", orphanRemoval=true)
-	private List<Ciclo> ofertas = new ArrayList<>();
+	private List<Oferta> ofertas = new ArrayList<>();
 
 	public RRHH(int id, String nombre, String apellidos, String email,
 			String password, String string, String empresa) {
@@ -39,7 +37,6 @@ public class RRHH {
 		this.apellidos = apellidos;
 		this.email = email;
 		this.password = password;
-		String = string;
 		this.empresa = empresa;
 	}
 
