@@ -4,13 +4,14 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
+@Entity
 public class Oferta {
 
 	
@@ -27,7 +28,7 @@ public class Oferta {
 	@JoinColumn(name="rrhhid")
 	private RRHH rrhh;
 	
-	@OneToMany(mappedBy="inscrito", orphanRemoval=true)
+	@OneToMany(mappedBy="oferta", orphanRemoval=true)
 	private List<Inscrito>inscritos = new ArrayList<>();
 
 	public int getId() {

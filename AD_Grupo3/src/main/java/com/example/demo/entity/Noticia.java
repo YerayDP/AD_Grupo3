@@ -22,15 +22,15 @@ public class Noticia {
 	
 	@ManyToOne
 	@JoinColumn(name="cicloId")
-	private Ciclo cicle;
+	private Ciclo ciclo;
 
-	public Noticia(int id, String titulo, String descripcion, String imagen, Ciclo cicle) {
+	public Noticia(int id, String titulo, String descripcion, String imagen, Ciclo ciclo) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.imagen = imagen;
-		this.cicle = cicle;
+		this.ciclo = ciclo;
 	}
 
 	public int getId() {
@@ -65,12 +65,12 @@ public class Noticia {
 		this.imagen = imagen;
 	}
 
-	public Ciclo getCicle() {
-		return cicle;
+	public Ciclo getCiclo() {
+		return ciclo;
 	}
 
-	public void setCicle(Ciclo cicle) {
-		this.cicle = cicle;
+	public void setCiclo(Ciclo ciclo) {
+		this.ciclo = ciclo;
 	}
 	
 }

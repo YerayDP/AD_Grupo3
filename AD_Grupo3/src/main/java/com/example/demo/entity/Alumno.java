@@ -111,6 +111,6 @@ public class Alumno {
 	@JoinColumn(name="CicloID")
 	private Ciclo ciclo;
 	
-	@OneToMany(mappedBy="inscrito", orphanRemoval=true)
+	@OneToMany(mappedBy="alumno", orphanRemoval=true)
 	private List<Inscrito>inscritos = new ArrayList<>();
 }
