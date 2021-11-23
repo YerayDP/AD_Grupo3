@@ -29,7 +29,7 @@ public class RRHH {
 	private String empresa;
 	
 	@OneToMany(mappedBy="rrhh", orphanRemoval=true)
-	private List<Ciclo> ofertas = new ArrayList<>();
+	private List<Oferta> ofertas = new ArrayList<>();
 
 	public RRHH(int id, String nombre, String apellidos, String email,
 			String password, String string, String empresa) {
