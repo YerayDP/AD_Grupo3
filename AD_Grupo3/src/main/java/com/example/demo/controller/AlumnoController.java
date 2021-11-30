@@ -14,6 +14,6 @@ public class AlumnoController {
 
 	@GetMapping("/A")
 	public String inicioA() {
-		return "Alumno"; 
+		return "login"; 
 	}
 }
