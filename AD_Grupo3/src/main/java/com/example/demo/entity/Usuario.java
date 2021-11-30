@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,24 +11,52 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
 @Entity
-public class Alumno {
+public class Usuario {
 
-	
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 	
 	private String nombre;
+	
 	private String apellidos;
+	
+	@Column(nullable=false)
+	private String email;
+	
+	@Column(nullable=false)
+	private String password;
+	
+	@Column(nullable=true)
+	@Size(max=9)
+	private String telefono;
+	
+	
+	@Column(nullable=true)
+	private String empresa;
+	
+	@Column(nullable=true)
 	private boolean activo;
-	public Alumno() {
+	
+	@OneToMany(mappedBy="usuario", orphanRemoval=true)
+	private List<Oferta> ofertas = new ArrayList<>();
+	
+	@ManyToOne 
+	@JoinColumn(name="CicloID")
+	private Ciclo ciclo;
+	
+	@OneToMany(mappedBy="usuario", orphanRemoval=true)
+	private List<Inscrito>inscritos = new ArrayList<>();
+
+	public Usuario() {
 		super();
 	}
 
-	public Alumno(int id, String nombre, String apellidos, boolean activo, String email, String password,
-			String telefono, Ciclo ciclo) {
+	public Usuario(int id, String nombre, String apellidos, boolean activo, String email, String password,
+			String telefono, String empresa, List<Oferta> ofertas, Ciclo ciclo, List<Inscrito> inscritos) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -36,7 +65,10 @@ public class Alumno {
 		this.email = email;
 		this.password = password;
 		this.telefono = telefono;
+		this.empresa = empresa;
+		this.ofertas = ofertas;
 		this.ciclo = ciclo;
+		this.inscritos = inscritos;
 	}
 
 	public int getId() {
@@ -95,6 +127,22 @@ public class Alumno {
 		this.telefono = telefono;
 	}
 
+	public String getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
+	}
+
+	public List<Oferta> getOfertas() {
+		return ofertas;
+	}
+
+	public void setOfertas(List<Oferta> ofertas) {
+		this.ofertas = ofertas;
+	}
+
 	public Ciclo getCiclo() {
 		return ciclo;
 	}
@@ -103,14 +151,12 @@ public class Alumno {
 		this.ciclo = ciclo;
 	}
 
-	private String email;
-	private String password;
-	private String telefono;
+	public List<Inscrito> getInscritos() {
+		return inscritos;
+	}
+
+	public void setInscritos(List<Inscrito> inscritos) {
+		this.inscritos = inscritos;
+	}
 	
-	@ManyToOne 
-	@JoinColumn(name="CicloID")
-	private Ciclo ciclo;
-	
-	@OneToMany(mappedBy="alumno", orphanRemoval=true)
-	private List<Inscrito>inscritos = new ArrayList<>();
 }

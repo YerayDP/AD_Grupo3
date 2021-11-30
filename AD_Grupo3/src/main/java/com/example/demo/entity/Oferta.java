@@ -25,11 +25,27 @@ public class Oferta {
 	private Date fechamax;
 	private int numCandidatos;
 	@ManyToOne 
-	@JoinColumn(name="rrhhid")
-	private RRHH rrhh;
+	@JoinColumn(name="usuarioId")
+	private Usuario usuario;
 	
 	@OneToMany(mappedBy="oferta", orphanRemoval=true)
 	private List<Inscrito>inscritos = new ArrayList<>();
+	
+	public Oferta(int id, String titular, String descripcion, String requisitos, Date fechamax, int numCandidatos,
+			Usuario usuario) {
+		super();
+		this.id = id;
+		this.titular = titular;
+		this.descripcion = descripcion;
+		this.requisitos = requisitos;
+		this.fechamax = fechamax;
+		this.numCandidatos = numCandidatos;
+		this.usuario = usuario;
+	}
+
+	public Oferta() {
+		super();
+	}
 
 	public int getId() {
 		return id;
@@ -79,28 +95,12 @@ public class Oferta {
 		this.numCandidatos = numCandidatos;
 	}
 
-	public RRHH getRrhh() {
-		return rrhh;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setRrhh(RRHH rrhh) {
-		this.rrhh = rrhh;
-	}
-
-	public Oferta(int id, String titular, String descripcion, String requisitos, Date fechamax, int numCandidatos,
-			RRHH rrhh) {
-		super();
-		this.id = id;
-		this.titular = titular;
-		this.descripcion = descripcion;
-		this.requisitos = requisitos;
-		this.fechamax = fechamax;
-		this.numCandidatos = numCandidatos;
-		this.rrhh = rrhh;
-	}
-
-	public Oferta() {
-		super();
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 }

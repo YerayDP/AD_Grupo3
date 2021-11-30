@@ -2,15 +2,19 @@ package com.example.demo.models;
 
 public class AlumnoModel {
 
-	
-	
     private int id;
 	
 	private String nombre;
 	private String apellidos;
 	private boolean activo;
-	public AlumnoModel() {
-		super();
+	private String email;
+	private String password;
+	private String telefono;
+	
+	
+	public AlumnoModel() 
+	{
+		
 	}
 
 	public AlumnoModel(int id, String nombre, String apellidos, boolean activo, String email, String password,
@@ -80,11 +84,5 @@ public class AlumnoModel {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-
-
-	private String email;
-	private String password;
-	private String telefono;
-	
 
 }
