@@ -11,22 +11,26 @@ public class UserModel {
 	private String telefono;
 	private String empresa;
 	private boolean activo;
+	private CicloModel ciclo_id;
+
+	
 
 	public UserModel() {
 		super();
 	}
 
-	public UserModel(int id, String nombre, String apellidos, boolean activo, String email, String password,
-			String telefono, String empresa) {
+	public UserModel(int id, String nombre, String apellidos, String email, String password, String telefono,
+			String empresa, boolean activo, CicloModel ciclo_id) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
-		this.activo = activo;
 		this.email = email;
 		this.password = password;
 		this.telefono = telefono;
 		this.empresa = empresa;
+		this.activo = activo;
+		this.ciclo_id = ciclo_id;
 	}
 
 	public int getId() {
@@ -91,6 +95,14 @@ public class UserModel {
 
 	public void setEmpresa(String empresa) {
 		this.empresa = empresa;
+	}
+
+	public CicloModel getCiclo_id() {
+		return ciclo_id;
+	}
+
+	public void setCiclo_id(CicloModel ciclo_id) {
+		this.ciclo_id = ciclo_id;
 	}
 
 }

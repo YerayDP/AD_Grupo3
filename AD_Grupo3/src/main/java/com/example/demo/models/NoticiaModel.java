@@ -14,15 +14,28 @@ public class NoticiaModel {
 	
 	private String imagen;
 	
+	private CicloModel ciclo_id;
 	
 
-	public NoticiaModel(int id, String titulo, String descripcion, String imagen, CicloModel ciclo) {
+	public NoticiaModel() {
+		super();
+	}
+
+	public NoticiaModel(int id, String titulo, String descripcion, String imagen, CicloModel ciclo_id) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.imagen = imagen;
-		
+		this.ciclo_id = ciclo_id;
+	}
+
+	public CicloModel getCiclo_id() {
+		return ciclo_id;
+	}
+
+	public void setCiclo_id(CicloModel ciclo_id) {
+		this.ciclo_id = ciclo_id;
 	}
 
 	public int getId() {

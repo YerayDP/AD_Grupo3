@@ -12,23 +12,36 @@ public class OfertaModel {
 	private String descripcion;
 	private String requisitos;
 	private Date fechamax;
+	private UserModel usuario_id;
 	private int numCandidatos;
+	
+	
+	
+	
 
-	public OfertaModel(int id, String titular, String descripcion, String requisitos, Date fechamax, int numCandidatos) {
+	public OfertaModel() {
+		super();
+	}
+
+	public OfertaModel(int id, String titular, String descripcion, String requisitos, Date fechamax,
+			UserModel usuario_id, int numCandidatos) {
 		super();
 		this.id = id;
 		this.titular = titular;
 		this.descripcion = descripcion;
 		this.requisitos = requisitos;
 		this.fechamax = fechamax;
+		this.usuario_id = usuario_id;
 		this.numCandidatos = numCandidatos;
 	}
 
-	public OfertaModel() {
-		super();
+	public UserModel getUsuario_id() {
+		return usuario_id;
 	}
-	
-	
+
+	public void setUsuario_id(UserModel usuario_id) {
+		this.usuario_id = usuario_id;
+	}
 
 	public int getId() {
 		return id;
