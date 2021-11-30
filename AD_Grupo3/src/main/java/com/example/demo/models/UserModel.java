@@ -1,24 +1,23 @@
 package com.example.demo.models;
 
-public class AlumnoModel {
+public class UserModel {
+
 
     private int id;
-	
 	private String nombre;
 	private String apellidos;
-	private boolean activo;
 	private String email;
 	private String password;
 	private String telefono;
-	
-	
-	public AlumnoModel() 
-	{
-		
+	private String empresa;
+	private boolean activo;
+
+	public UserModel() {
+		super();
 	}
 
-	public AlumnoModel(int id, String nombre, String apellidos, boolean activo, String email, String password,
-			String telefono) {
+	public UserModel(int id, String nombre, String apellidos, boolean activo, String email, String password,
+			String telefono, String empresa) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -27,6 +26,7 @@ public class AlumnoModel {
 		this.email = email;
 		this.password = password;
 		this.telefono = telefono;
+		this.empresa = empresa;
 	}
 
 	public int getId() {
@@ -83,6 +83,14 @@ public class AlumnoModel {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+	public String getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
 	}
 
 }

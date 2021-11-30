@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Usuario {
+public class User {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -51,11 +51,11 @@ public class Usuario {
 	@OneToMany(mappedBy="usuario", orphanRemoval=true)
 	private List<Inscrito>inscritos = new ArrayList<>();
 
-	public Usuario() {
+	public User() {
 		super();
 	}
 
-	public Usuario(int id, String nombre, String apellidos, boolean activo, String email, String password,
+	public User(int id, String nombre, String apellidos, boolean activo, String email, String password,
 			String telefono, String empresa, List<Oferta> ofertas, Ciclo ciclo, List<Inscrito> inscritos) {
 		super();
 		this.id = id;

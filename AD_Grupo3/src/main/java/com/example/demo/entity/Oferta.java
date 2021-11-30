@@ -26,13 +26,13 @@ public class Oferta {
 	private int numCandidatos;
 	@ManyToOne 
 	@JoinColumn(name="usuarioId")
-	private Usuario usuario;
+	private User usuario;
 	
 	@OneToMany(mappedBy="oferta", orphanRemoval=true)
 	private List<Inscrito>inscritos = new ArrayList<>();
 	
 	public Oferta(int id, String titular, String descripcion, String requisitos, Date fechamax, int numCandidatos,
-			Usuario usuario) {
+			User usuario) {
 		super();
 		this.id = id;
 		this.titular = titular;
@@ -95,11 +95,11 @@ public class Oferta {
 		this.numCandidatos = numCandidatos;
 	}
 
-	public Usuario getUsuario() {
+	public User getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(User usuario) {
 		this.usuario = usuario;
 	}
 	

@@ -17,7 +17,7 @@ public class Inscrito {
 	
 	@ManyToOne
 	@JoinColumn(name="idUsuario")
-	private Usuario usuario;
+	private User usuario;
 	
 	@ManyToOne 
 	@JoinColumn(name="idOferta")
@@ -29,7 +29,7 @@ public class Inscrito {
 		super();
 	}
 
-	public Inscrito(int id, Usuario usuario, Oferta oferta, Date fecha_inscripcion) {
+	public Inscrito(int id, User usuario, Oferta oferta, Date fecha_inscripcion) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
@@ -45,11 +45,11 @@ public class Inscrito {
 		this.id = id;
 	}
 
-	public Usuario getUsuario() {
+	public User getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(User usuario) {
 		this.usuario = usuario;
 	}
 

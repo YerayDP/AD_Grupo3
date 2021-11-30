@@ -24,7 +24,7 @@ public class Ciclo {
 	private List<Noticia> noticias = new ArrayList<>();
 	
 	@OneToMany(mappedBy="ciclo", orphanRemoval=true)
-	private List<Usuario> usuarios = new ArrayList<>();
+	private List<User> usuarios = new ArrayList<>();
 
 	public Ciclo(int id, String nombre, String tipo) { 
 		super();
