@@ -21,7 +21,7 @@ public class User {
     private int id;
 	
 	private String nombre;
-	
+	private String role;
 	private String apellidos;
 	
 	@Column(nullable=false)
@@ -51,21 +51,25 @@ public class User {
 	@OneToMany(mappedBy="usuario", orphanRemoval=true)
 	private List<Inscrito>inscritos = new ArrayList<>();
 
+	
+
 	public User() {
 		super();
 	}
 
-	public User(int id, String nombre, String apellidos, boolean activo, String email, String password,
-			String telefono, String empresa, List<Oferta> ofertas, Ciclo ciclo, List<Inscrito> inscritos) {
+	public User(int id, String nombre, String role, String apellidos, String email, String password,
+			@Size(max = 9) String telefono, String empresa, boolean activo, List<Oferta> ofertas, Ciclo ciclo,
+			List<Inscrito> inscritos) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
+		this.role = role;
 		this.apellidos = apellidos;
-		this.activo = activo;
 		this.email = email;
 		this.password = password;
 		this.telefono = telefono;
 		this.empresa = empresa;
+		this.activo = activo;
 		this.ofertas = ofertas;
 		this.ciclo = ciclo;
 		this.inscritos = inscritos;
@@ -157,6 +161,14 @@ public class User {
 
 	public void setInscritos(List<Inscrito> inscritos) {
 		this.inscritos = inscritos;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 }
