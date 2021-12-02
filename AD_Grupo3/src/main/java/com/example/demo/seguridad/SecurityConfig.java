@@ -28,13 +28,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
-		.antMatchers("/**").permitAll()
+		.antMatchers("/*","/auth/*","assets/**","/css/**","/js/**","/public/**","/static/**").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()
 		.loginPage("/auth/login")
 		.usernameParameter("email")
-		.defaultSuccessUrl("/courses/listCourses",true)
+		.defaultSuccessUrl("/",true)
 		.permitAll()
 		.and()
 		.logout()
