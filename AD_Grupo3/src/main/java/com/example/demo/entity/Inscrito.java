@@ -15,27 +15,27 @@ public class Inscrito {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 	
-	@ManyToOne 
-	@JoinColumn(name="idAlumno")
-	private Alumno alumno;
+	@ManyToOne
+	@JoinColumn(name="idUsuario")
+	private User usuario;
 	
 	@ManyToOne 
 	@JoinColumn(name="idOferta")
 	private Oferta oferta;
 	
+	private Date fecha_inscripcion;
+	
 	public Inscrito() {
 		super();
 	}
 
-	public Inscrito(int id, Alumno alumno, Oferta oferta, Date fecha_inscripcion) {
+	public Inscrito(int id, User usuario, Oferta oferta, Date fecha_inscripcion) {
 		super();
 		this.id = id;
-		this.alumno = alumno;
+		this.usuario = usuario;
 		this.oferta = oferta;
 		this.fecha_inscripcion = fecha_inscripcion;
 	}
-
-	private Date fecha_inscripcion;
 
 	public int getId() {
 		return id;
@@ -45,12 +45,12 @@ public class Inscrito {
 		this.id = id;
 	}
 
-	public Alumno getAlumno() {
-		return alumno;
+	public User getUsuario() {
+		return usuario;
 	}
 
-	public void setAlumno(Alumno alumno) {
-		this.alumno = alumno;
+	public void setUsuario(User usuario) {
+		this.usuario = usuario;
 	}
 
 	public Oferta getOferta() {
