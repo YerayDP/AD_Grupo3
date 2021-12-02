@@ -20,11 +20,11 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="#!">Start Bootstrap</a>
                 <li sec:authorize ="isAuthenticated()" class="nav-item">
 		        	<form class="form-inline" th:action="@{/logout}" method="post">
 						<button class="btn btn-link" type="submit">Logout</button>
 					</form>
+					<div>Bienvenido <span sec:authentication="name"></span></div>
 		        </li>
                 <a class="btn btn-primary" href="@{/auth/login}">Iniciar sesion</a>  
             </div>
