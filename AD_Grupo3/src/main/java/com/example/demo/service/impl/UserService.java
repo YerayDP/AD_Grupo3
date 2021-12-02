@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,6 +12,9 @@ import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.Oferta;
+import com.example.demo.models.OfertaModel;
+import com.example.demo.models.UserModel;
 import com.example.demo.repository.UserRepository;
 
 @Service("userService")
@@ -22,6 +26,18 @@ public class UserService implements UserDetailsService{
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+	
+	public UserModel transform(User User)
+	{
+		ModelMapper modelmapper = new ModelMapper();
+		return modelmapper.map(User, UserModel.class);
+	}
+	
+	public User transform(UserModel Usermodel)
+	{
+		ModelMapper modelMapper = new ModelMapper();
+		return modelMapper.map(Usermodel, User.class);
+	}
 	
 	public com.example.demo.entity.User registrar(com.example.demo.entity.User user){
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -48,4 +64,10 @@ public class UserService implements UserDetailsService{
 		return builder.build();
 	}
 	
+	//public UserModel findUserId (int id) {
+		
+	//	return transform(userRepository.findById(id));
+	
+		
+	//}
 }
