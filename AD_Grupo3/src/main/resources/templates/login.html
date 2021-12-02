@@ -5,8 +5,16 @@
 <title>Login</title>
 </head>
 <body>
-	
-	<h1>H</h1>
 
+<h1>Login page</h1>
+    <p th:if="${loginError}" class="error">Wrong user or password</p>
+    <form th:action="@{/auth/login}" method="post">
+    <input type="hidden" name="${ csrf.parameterName}" value="${ csrf.token}"/>
+      <label for="email">Email</label>:
+      <input type="text" id="email" name="email" autofocus="autofocus"/><br/>
+      <label for="password">Password</label>:
+      <input type="password" id="password" name="password"/><br/>
+      <input class="btn btn-light" type="submit" value="login"/>
+    </form>
 </body>
 </html>
