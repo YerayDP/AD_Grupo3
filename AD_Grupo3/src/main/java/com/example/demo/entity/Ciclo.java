@@ -26,6 +26,11 @@ public class Ciclo {
 	@OneToMany(mappedBy="ciclo", orphanRemoval=true)
 	private List<User> usuarios = new ArrayList<>();
 
+	
+	public Ciclo() {
+		super();
+	}
+
 	public Ciclo(int id, String nombre, String tipo) { 
 		super();
 		this.id = id;

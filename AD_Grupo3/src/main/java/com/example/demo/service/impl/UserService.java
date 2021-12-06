@@ -27,17 +27,6 @@ public class UserService implements UserDetailsService{
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
-	public UserModel transform(User User)
-	{
-		ModelMapper modelmapper = new ModelMapper();
-		return modelmapper.map(User, UserModel.class);
-	}
-	
-	public User transform(UserModel Usermodel)
-	{
-		ModelMapper modelMapper = new ModelMapper();
-		return modelMapper.map(Usermodel, User.class);
-	}
 	
 	public com.example.demo.entity.User registrar(com.example.demo.entity.User user){
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -64,10 +53,41 @@ public class UserService implements UserDetailsService{
 		return builder.build();
 	}
 	
-	//public UserModel findUserId (int id) {
+	public UserDetails findUserId(int id) throws UsernameNotFoundException {
+		com.example.demo.entity.User usuario=userRepository.findById(id);
+		String username=usuario.getEmail();
+		UserBuilder builder=null;
 		
-	//	return transform(userRepository.findById(id));
+		if(usuario!=null)
+		{
+			builder=User.withUsername(username);
+			builder.disabled(false);
+			builder.password(usuario.getPassword());
+			builder.authorities(new SimpleGrantedAuthority(usuario.getRole()));
+		}
+		else
+			throw new UsernameNotFoundException("Usuario no encontrado");
+		return builder.build();
+	}
 	
+	public UserModel transform(com.example.demo.entity.User user)
+	{
+		ModelMapper modelmapper = new ModelMapper();
+		return modelmapper.map(user, UserModel.class);
+	}
+	
+	public User transform(UserModel Usermodel)
+	{
+		ModelMapper modelMapper = new ModelMapper();
+		return modelMapper.map(Usermodel, User.class);
+	}
+	
+	
+	public UserModel findStudentId (int id) {
 		
-	//}
+		return transform (userRepository.findById(id));
+		
+	}
+	
+	
 }

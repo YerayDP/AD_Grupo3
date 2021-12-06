@@ -10,6 +10,12 @@ public class CicloModel {
 	
 	private String tipo;
 	
+	
+	
+	public CicloModel() {
+		super();
+	}
+
 	public CicloModel(int id, String nombre, String tipo) { 
 		super();
 		this.id = id;
