@@ -76,10 +76,10 @@ public class UserService implements UserDetailsService{
 		return modelmapper.map(user, UserModel.class);
 	}
 	
-	public User transform(UserModel Usermodel)
+	public com.example.demo.entity.User transform(UserModel Usermodel)
 	{
 		ModelMapper modelMapper = new ModelMapper();
-		return modelMapper.map(Usermodel, User.class);
+		return modelMapper.map(Usermodel, com.example.demo.entity.User.class);
 	}
 	
 	

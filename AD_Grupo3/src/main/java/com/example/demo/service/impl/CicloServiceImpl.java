@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Ciclo;
 import com.example.demo.models.CicloModel;
-
 import com.example.demo.repository.cicloRepository;
 import com.example.demo.service.CicloService;
 
@@ -17,6 +17,7 @@ import com.example.demo.service.CicloService;
 @Service("cicloService")
 public class CicloServiceImpl implements CicloService{
 	
+	@Autowired
 	private cicloRepository CicloRepository;
 
 	public CicloModel transform(Ciclo Ciclo) 
@@ -31,12 +32,14 @@ public class CicloServiceImpl implements CicloService{
 		return modelMapper.map(Ciclomodel, Ciclo.class);
 	}
 	
-	@Override
+
 	public List<CicloModel> listAllCiclos() {
 		return CicloRepository.findAll().stream()
 				.map(c->transform(c)).collect(Collectors.toList());
 
 	}
+	
+
 
 	@Override
 	public Ciclo addCiclo(CicloModel CicloModel) {
