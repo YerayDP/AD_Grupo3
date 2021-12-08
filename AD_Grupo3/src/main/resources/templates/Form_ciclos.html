@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Formulario</title>
+</head>
+<body>
+
+<form action="#" th:action="@{/ciclos/addCiclo}" th:object="${ciclo}" method="post">
+
+	<div>
+		<input type="hidden" th:field="*{id}" class="form-control" id="id" placeholder="Enter id">
+	</div>
+	
+	<div>
+		<label for="nombre">Nombre</label>
+		<input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="Enter nombre">
+	</div>
+	
+	<div>
+		<label for="tipo">tipo</label>
+		<input type="text" th:field="*{tipo}" class="form-control" id="tipo" placeholder="Enter tipo">
+	</div>
+	
+	<input type="submit" class="btn btn-primary">
+</form>
+
+</body>
+</html>
