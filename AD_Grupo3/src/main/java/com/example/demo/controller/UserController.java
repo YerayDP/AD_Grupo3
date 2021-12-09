@@ -53,7 +53,7 @@ public class UserController {
 	    model.addAttribute("user", user);
 	    return "User";
 	}
-=======
+
 	/*@PostMapping("/addUser")
 	public String addStudent(@ModelAttribute("student")UserModel userModel,Model model)
 	{
