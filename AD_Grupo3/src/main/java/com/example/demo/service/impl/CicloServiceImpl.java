@@ -33,13 +33,14 @@ public class CicloServiceImpl implements CicloService{
 		return modelMapper.map(Ciclomodel, Ciclo.class);
 	}
 	
-	@Override
+
 	public List<CicloModel> listAllCiclos() {
 		return CicloRepository.findAll().stream()
 				.map(c->transform(c)).collect(Collectors.toList());
 
 	}
-	
+
+	@Override
 	public Ciclo addCiclo(CicloModel CicloModel) {
 		return CicloRepository.save(transform(CicloModel));
 	}

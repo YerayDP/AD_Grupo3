@@ -18,7 +18,7 @@ public class User {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
+    private long id;
 	
 	private String nombre;
 	private String role;
@@ -57,7 +57,7 @@ public class User {
 		super();
 	}
 
-	public User(int id, String nombre, String role, String apellidos, String email, String password,
+	public User(long id, String nombre, String role, String apellidos, String email, String password,
 			@Size(max = 9) String telefono, String empresa, boolean activo, List<Oferta> ofertas, Ciclo ciclo,
 			List<Inscrito> inscritos) {
 		super();
@@ -75,11 +75,11 @@ public class User {
 		this.inscritos = inscritos;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
