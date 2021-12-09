@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 import com.example.demo.entity.User;
 
 import com.example.demo.models.UserModel;
@@ -45,11 +46,24 @@ public class UserController {
 			model.addAttribute("user", userService.findUserId(id));
 		return USER_VIEW;
 	}
+
 	@GetMapping("/edit/{id}")
 	public String showUpdateForm(@PathVariable("id") long id, Model model) {
 	    User user = userRepository.findById(id);
 	    model.addAttribute("user", user);
 	    return "User";
 	}
+=======
+	/*@PostMapping("/addUser")
+	public String addStudent(@ModelAttribute("student")UserModel userModel,Model model)
+	{
+		if(userModel.getId()==0)
+			userService.registrar(userModel);
+		else
+			userService.updateStudent(userModel);
+		
+		return "redirect:/students/listStudents";
+	}*/
+
 }
 												 	 					
