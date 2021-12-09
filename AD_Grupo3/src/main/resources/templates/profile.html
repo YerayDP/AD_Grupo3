@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+</head>
+<body>
+<a class="btn btn-primary" th:href="@{/}">Volver</a>
+<div th:switch="${users}">
+    <h2 th:case="null">No users yet!</h2>
+        <div th:case="*">
+            <h2><span sec:authentication="name"></span></h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Edit</th>
+                    
+                    </tr>
+                </thead>
+                <tbody>
+           
+	                <tr th:each="user : ${users}">
+	                    <td th:text="${user.nombre}"></td>
+	                    <td th:text="${user.email}"></td>
+	                    <td><a th:href="@{/user/edit/{id}(id=${user.id})}">Edit</a></td>
+	                </tr>
+          
+            </tbody>
+        </table>
+    </div>      
+</div>
+</body>
+</html>

@@ -26,8 +26,10 @@
 					</form>
 					<div>Bienvenido <span sec:authentication="name"></span></div>
 		        </li>
-                <a class="btn btn-primary" href="@{/auth/login}">Iniciar sesion</a>
-                <a class="btn btn-primary" href="@{/edit/{id}">Editar perfil</a>
+		        <li sec:authorize ="!isAuthenticated()" class="nav-item">
+                	<a class="btn btn-primary" href="@{/auth/login}">Iniciar sesion</a>
+                </li>
+                <a class="btn btn-primary" th:href="@{/user/index}">Perfil</a>
             </div>
             
         </nav>
