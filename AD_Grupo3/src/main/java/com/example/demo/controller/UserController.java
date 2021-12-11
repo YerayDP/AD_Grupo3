@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.entity.User;
 
 import com.example.demo.models.UserModel;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.cicloRepository;
 import com.example.demo.service.impl.UserService;
 import com.example.demo.service.CicloService;
 
@@ -28,6 +29,8 @@ import com.example.demo.service.CicloService;
 public class UserController {
 	private static  String USER_VIEW="User";
 	private static  String INDEX_VIEW="index";
+	private static  String INDEXALU_VIEW="indexAlumnos";
+	private static  String INDEXRRHH_VIEW="indexRRHH";
 	@Autowired
 	@Qualifier("userService")
 	private UserService userService;
@@ -40,23 +43,26 @@ public class UserController {
 	@Qualifier("userRepository")
 	private UserRepository userRepository;
 	
+	
+	
 	@GetMapping("/")
 	public String Volver() {
 	    return "index";
 	}
 	
 	@GetMapping("/indexRRHH")
-	public String showRRHH(Model model) {
-		String id= SecurityContextHolder.getContext().getAuthentication().getName();
-	    model.addAttribute("users", userRepository.findByEmail(id));
-	    return "profile";
+	public ModelAndView showRRHH() {
+		ModelAndView mav = new ModelAndView(INDEXRRHH_VIEW);
+		mav.addObject("users", userService.findStudentRole("ROLE_RRHH"));
+	    return mav;
 	}
 	
 	@GetMapping("/indexAlumnos")
-	public String showUser(Model model) {
-		String id= SecurityContextHolder.getContext().getAuthentication().getName();
-	    model.addAttribute("users", userRepository.findByEmail(id));
-	    return "profile";
+	public ModelAndView showUser() {
+		ModelAndView mav = new ModelAndView(INDEXALU_VIEW);
+		mav.addObject("users", userService.findStudentRole("ROLE_ALUMNO"));
+		mav.addObject("ciclos", cicloService.listAllCiclos());
+	    return mav;
 	}
 	
 	@GetMapping("/index")
@@ -69,34 +75,62 @@ public class UserController {
 	@PostMapping("/update/{id}")
 	public String addStudent(@ModelAttribute("user")User userModel,Model model)
 	{
-		if(userModel.getId()==0)
+		String route="";
+		if(userModel.getId()==0) {
 			userService.registrar(userModel);
+			if(userModel.getRole().equals("ROLE_ALUMNO")) {
+				userRepository.save(userModel);
+				route= "redirect:/user/indexAlumnos";
+			}
+			else {
+				userRepository.save(userModel);
+				route= "redirect:/user/indexRRHH";
+			}
+		}	
 		else
-			userRepository.save(userModel);
-		
-		return "redirect:/user/index";
+			if(userModel.getRole().equals("ROLE_ALUMNO")) {
+				userRepository.save(userModel);
+				route= "redirect:/user/indexAlumnos";
+			}
+			else {
+				userRepository.save(userModel);
+				route= "redirect:/user/indexRRHH";
+			}
+				
+		return route;
 	}
 	
 
 	
+	
 	@GetMapping("/edit/{id}")
-	public String showUpdateForm(@PathVariable("id") long id, Model model) {
+	public String edit(@PathVariable("id") long id, Model model) {
 		model.addAttribute("ciclos", cicloService.listAllCiclos());
 	    User user = userRepository.findById(id);
 	    model.addAttribute("user", user);
-	    return "User";
+	    if(user.getRole().equals("ROLE_ALUMNO")) {
+	    	
+	    	return "UserEdit";
+	    }
+	    else {
+	    	return "RRHHEdit";
+	    }
+	    	
+	}
+	@GetMapping("/delete/{id}")
+	public String deleteUser(@PathVariable("id")long id)
+	{
+		User user = userRepository.findById(id);
+		userService.removeUser(id);
+		if(user.getRole().equals("ROLE_ALUMNO")) {
+			return "/user/indexAlumnos";
+		}
+		else {
+			return "/user/indexRRHH";
+		}
+    		
 	}
 
-	/*@PostMapping("/addUser")
-	public String addStudent(@ModelAttribute("student")UserModel userModel,Model model)
-	{
-		if(userModel.getId()==0)
-			userService.registrar(userModel);
-		else
-			userService.updateStudent(userModel);
-		
-		return "redirect:/students/listStudents";
-	}*/
-
+	
 }
 												 	 					

@@ -1,5 +1,8 @@
 package com.example.demo.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Oferta;
+import com.example.demo.models.CicloModel;
 import com.example.demo.models.OfertaModel;
 import com.example.demo.models.UserModel;
 import com.example.demo.repository.UserRepository;
@@ -88,6 +92,16 @@ public class UserService implements UserDetailsService{
 		return transform (userRepository.findById(id));
 		
 	}
+	public List<UserModel> findStudentRole(String role) {
+		return userRepository.findByRole(role).stream()
+				.map(c->transform(c)).collect(Collectors.toList());
+
+	}
+	public int removeUser(long id) {
+		userRepository.deleteById(id);
+		return 0;
+	}
+	
 	
 	
 	
