@@ -17,7 +17,7 @@
                         <th>Nombre</th>
                         <th>Apellidos</th>
                         <th>Email</th>
-                        <th>Password</th>
+              
                         <th>Telefono</th>
                         <th>Empresa</th>
                         <th>Edit</th>
@@ -32,7 +32,7 @@
 	                    <td th:text="${user.nombre}"></td>
 	                    <td th:text="${user.apellidos}"></td>
 	                    <td th:text="${user.email}"></td>
-	                    <td th:text="${user.password}"></td>
+	                    
 	                    <td th:text="${user.empresa}"></td>
 	                    <td><a th:href="@{/user/edit/{id}(id=${user.id})}">Edit</a></td>
 	                    <td><a th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a></td>
