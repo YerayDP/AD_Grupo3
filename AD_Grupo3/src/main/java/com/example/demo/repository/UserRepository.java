@@ -16,7 +16,7 @@ public interface UserRepository extends JpaRepository <User, Serializable>{
 	public abstract User findById(long id);
 	public abstract List<User> findByRole(String role);
 	public abstract User findByCiclo_id(long id);
-	public abstract UserModel updateUser (UserModel userModel);
+	
 	
 }
  
