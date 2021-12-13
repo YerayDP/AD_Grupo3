@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.User;
+import com.example.demo.service.CicloService;
 import com.example.demo.service.impl.UserService;
 
 @Controller
@@ -20,21 +22,29 @@ public class LoginController {
 	@Qualifier("userService")
 	private UserService userService;
 	
+	@Autowired
+	@Qualifier("cicloService")
+	private CicloService cicloService;
+	
 	@GetMapping("/auth/login")
 	public String login(Model model, @RequestParam(name="error", required=false) String error,
 			@RequestParam(name="logout", required=false) String logout)
 	{
 		model.addAttribute("user",new User());
 		model.addAttribute("error",error);
+		//, RedirectAttributes flash
+		//flash.addFlashAttribute("success", "Sesion cerrada correctamente");
 		model.addAttribute("logout",logout);
 		return "login";
 	}
 	
 	@GetMapping("/auth/registerForm")
-	public String registerForm(Model model)
+	public ModelAndView registerForm(Model model)
 	{
+		ModelAndView mav = new ModelAndView("registro");
 		model.addAttribute("user",new User());
-		return "registro";
+		mav.addObject("ciclos", cicloService.listAllCiclos());
+		return mav;
 	}
 	
 	@PostMapping("auth/register")

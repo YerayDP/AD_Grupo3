@@ -43,6 +43,13 @@
 </div>
 
 <div class="form-label-group">
+<label>Ciclo</label>
+<select class="form-control selectpicker" th:field="*{ciclo.id}" id="ciclo">
+			<option th:each="ciclo  : ${ciclos}" th:value="${ciclo.id}" th:text="${ciclo.nombre}"></option>
+</select>
+</div>
+
+<div class="form-label-group">
 <label>Email</label>
 <input type="text" th:field="*{email}" class="form-control" placeholder="email" name="email"/>
 </div>
