@@ -100,7 +100,7 @@ public class UserService implements UserDetailsService{
 	public int removeUser(long id) {
 		userRepository.deleteById(id);
 		return 0;
-	}
+	} 
 	
 
 	
