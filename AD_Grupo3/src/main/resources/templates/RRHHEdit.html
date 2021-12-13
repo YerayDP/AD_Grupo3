@@ -27,7 +27,7 @@
 	</h1>
 	<div>
 		<input type="hidden" th:field="*{id}" class="form-control" id="id" placeholder="Enter id">
-		<input type="hidden" th:field="*{password}" class="form-control" id="password" placeholder="Enter password">
+		
 	</div>
 	<div class="form-group">
 		<label for="nombre">Nombre</label>
@@ -37,12 +37,21 @@
 		<label for="apellidos">Apellidos</label>
 		<input type="text" th:field="*{apellidos}" class="form=control" id="apellidos" placeholder="Enter Firstname">
 	</div>
-	<div class="form-group" >
+	
+	<div th:if="${#authorization.expression('hasRole(''ROLE_RRHH'')') }">
 		<label for="Email">Email</label>
 		<input th:readonly="true" type="email" th:field="*{email}" class="form=control" id="email"
 		placeholder="Enter Mail">
 	</div>
-	
+	<div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+    	<label for="Email">Email</label>
+		<input type="email" th:field="*{email}" class="form=control" id="email"
+		placeholder="Enter Mail">
+	</div>
+	<div>
+		<label for="password">Password</label>
+		<input th:field="*{password}" class="form-control" id="password" placeholder="Enter password">
+	</div>
 	<div class="form-group">
 		<label for="telefono">Telefono</label>
 		<input type="text" th:field="*{telefono}" class="form=control" id="telefono"

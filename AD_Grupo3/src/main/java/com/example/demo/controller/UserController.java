@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,7 +43,8 @@ public class UserController {
 	@Autowired
 	@Qualifier("userRepository")
 	private UserRepository userRepository;
-	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	
 	@GetMapping("/")
@@ -55,6 +57,12 @@ public class UserController {
 		ModelAndView mav = new ModelAndView(INDEXRRHH_VIEW);
 		mav.addObject("users", userService.findStudentRole("ROLE_RRHH"));
 	    return mav;
+	}
+	@GetMapping("/addRRHH")
+	public String addRRHH(@ModelAttribute("user")User User,Model model)
+	{
+		
+		return "RRHHEdit";
 	}
 	
 	@GetMapping("/indexAlumnos")
@@ -77,12 +85,14 @@ public class UserController {
 	{
 		String route="";
 		if(userModel.getId()==0) {
-			userService.registrar(userModel);
 			if(userModel.getRole().equals("ROLE_ALUMNO")) {
+				userService.registrar(userModel);
 				userRepository.save(userModel);
 				route= "redirect:/user/indexAlumnos";
 			}
 			else {
+				userService.registrar(userModel);
+				userModel.setRole("ROLE_RRHH");
 				userRepository.save(userModel);
 				route= "redirect:/user/indexRRHH";
 			}
@@ -93,21 +103,52 @@ public class UserController {
 				route= "redirect:/user/indexAlumnos";
 			}
 			else {
+				
 				userRepository.save(userModel);
 				route= "redirect:/user/indexRRHH";
 			}
 				
 		return route;
 	}
+	@GetMapping("/activate/{id}")
+	public String activateUser(@PathVariable("id")long id)
+	{
+		User user = userRepository.findById(id);
+		user.setActivo(true);
+		userRepository.save(user);
+		if(user.getRole().equals("ROLE_ALUMNO")) {
+			
+			return "redirect:/user/indexAlumnos";
+		}
+		else {
+			return "redirect:/user/indexRRHH";
+		}
 	
-
 	
+	}
+	@GetMapping("/deactivate/{id}")
+	public String deactivateUser(@PathVariable("id")long id)
+	{
+		User user = userRepository.findById(id);
+		user.setActivo(false);
+		userRepository.save(user);
+		if(user.getRole().equals("ROLE_ALUMNO")) {
+			
+			return "redirect:/user/indexAlumnos";
+		}
+		else {
+			return "redirect:/user/indexRRHH";
+		}
 	
-	@GetMapping("/edit/{id}")
+	}
+	
+	@GetMapping(value={"/edit","/edit/{id}"})
 	public String edit(@PathVariable("id") long id, Model model) {
 		model.addAttribute("ciclos", cicloService.listAllCiclos());
 	    User user = userRepository.findById(id);
 	    model.addAttribute("user", user);
+	    
+	    user.setPassword("");
 	    if(user.getRole().equals("ROLE_ALUMNO")) {
 	    	
 	    	return "UserEdit";
@@ -121,12 +162,14 @@ public class UserController {
 	public String deleteUser(@PathVariable("id")long id)
 	{
 		User user = userRepository.findById(id);
-		userService.removeUser(id);
+		
 		if(user.getRole().equals("ROLE_ALUMNO")) {
-			return "/user/indexAlumnos";
+			userService.removeUser(id);
+			return "indexAlumnos";
 		}
 		else {
-			return "/user/indexRRHH";
+			userService.removeUser(id);
+			return "indexRRHH";
 		}
     		
 	}

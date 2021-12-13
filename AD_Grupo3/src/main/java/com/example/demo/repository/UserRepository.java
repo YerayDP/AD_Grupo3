@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.User;
+import com.example.demo.models.UserModel;
 
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository <User, Serializable>{
@@ -15,6 +16,7 @@ public interface UserRepository extends JpaRepository <User, Serializable>{
 	public abstract User findById(long id);
 	public abstract List<User> findByRole(String role);
 	public abstract User findByCiclo_id(long id);
+	public abstract UserModel updateUser (UserModel userModel);
 	
 }
  

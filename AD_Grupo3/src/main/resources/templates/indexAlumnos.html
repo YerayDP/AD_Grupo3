@@ -17,7 +17,7 @@
         <link th:href="@{/css/styles.css}" rel="stylesheet" />
 </head>
 <a class="btn btn-primary" th:href="@{/}">Volver</a>
-<a th:href="@{/user/edit}" class="btn btn-primary">Nuevo User</a>
+
 <div class="row justify-content-center">
     <div class="col-xl-6">
     	<div class="text-center">
@@ -53,8 +53,12 @@
 	                    <td th:text="${user.email}"></td>
 	                    <td th:text="${user.telefono}"></td>
 	                    <td th:text="${user.ciclo_id}"></td>
-	                    <td><a th:href="@{/user/edit/{id}(id=${user.id})}">Edit</a>
-	                    <a th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a></td>
+	                    <td>
+	                    	<a th:href="@{/user/activate/{id}(id=${user.id})}">Activar</a>
+	                    	<a th:href="@{/user/deactivate/{id}(id=${user.id})}">Desactivar</a>
+	                   	 	<a th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a>
+	                    	
+	                    </td>
 	                </tr>
           
             </tbody>
