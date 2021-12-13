@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,6 +51,7 @@ public class UserController {
 	    return "index";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/indexRRHH")
 	public ModelAndView showRRHH() {
 		ModelAndView mav = new ModelAndView(INDEXRRHH_VIEW);
@@ -57,6 +59,7 @@ public class UserController {
 	    return mav;
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/indexAlumnos")
 	public ModelAndView showUser() {
 		ModelAndView mav = new ModelAndView(INDEXALU_VIEW);
@@ -102,7 +105,7 @@ public class UserController {
 	
 
 	
-	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") long id, Model model) {
 		model.addAttribute("ciclos", cicloService.listAllCiclos());
@@ -117,6 +120,8 @@ public class UserController {
 	    }
 	    	
 	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/delete/{id}")
 	public String deleteUser(@PathVariable("id")long id)
 	{
