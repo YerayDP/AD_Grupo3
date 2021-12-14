@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -35,9 +36,14 @@ public class UserService implements UserDetailsService{
 	
 	
 	public com.example.demo.entity.User registrar(com.example.demo.entity.User user){
+		
+		String userM=user.getRole();
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setActivo(false);
-		user.setRole("ROLE_ALUMNO");
+		if(userM.equals("ROLE_RRHH"))
+			user.setRole("ROLE_RRHH");
+		else
+			user.setRole("ROLE_ALUMNO");
 		return userRepository.save(user);
 	}
 	

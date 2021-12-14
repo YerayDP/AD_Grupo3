@@ -89,6 +89,7 @@ public class UserController {
 		String route="";
 		if(userM.getRole().equals("ROLE_ADMIN")) {
 			if(user.getId()==0) {
+					
 					userService.registrar(user);
 					route= "redirect:/user/indexRRHH";
 				}
@@ -96,10 +97,10 @@ public class UserController {
 				userService.updateUser(userModel);
 				if(user.getRole().equals("ROLE_ALUMNO")) {
 					
-					route= "redirect:/user/indexALUMNO";
+					route= "redirect:/user/indexAlumnos";
 				}
 				else {
-					route= "redirect:/user/indexALUMNO";
+					route= "redirect:/user/indexRRHH";
 				}
 			}
 		}
@@ -179,11 +180,11 @@ public class UserController {
 		
 		if(user.getRole().equals("ROLE_ALUMNO")) {
 			userService.removeUser(id);
-			return "indexAlumnos";
+			return "redirect:/user/indexAlumnos";
 		}
 		else {
 			userService.removeUser(id);
-			return "indexRRHH";
+			return "redirect:/user/indexRRHH";
 		}
     		
 	}
