@@ -35,12 +35,12 @@
 	</div>
 	<div class="form-group">
 		<label for="apellidos">Apellidos</label>
-		<input type="text" th:field="*{apellidos}" class="form=control" id="apellidos"
+		<input type="text" th:field="*{apellidos}" class="form-control" id="apellidos"
 		placeholder="Enter Firstname">
 	</div>
 	<div class="form-group" >
 		<label for="Email">Email</label>
-		<input th:readonly="true" type="email" th:field="*{email}" class="form=control" id="email"
+		<input th:readonly="true" type="email" th:field="*{email}" class="form-control" id="email"
 		placeholder="Enter Mail">
 	</div>
 	<div th:if="${#authorization.expression('hasRole(''ROLE_ALUMNO'')') }">
@@ -49,15 +49,15 @@
 	</div>
 	<div class="form-group">
 		<label for="telefono">Telefono</label>
-		<input type="text" th:field="*{telefono}" class="form=control" id="telefono"
+		<input type="text" th:field="*{telefono}" class="form-control" id="telefono"
 		placeholder="Enter Telefono">
 	</div>
 	
 	<input id="role" name="role" type="hidden" value="ROLE_ALUMNO"/> 
 
 	<div class="form-group">
-		<label for="ciclo">Elegir ciclo</label>
-		<select class="form-control selectpicker" th:field="*{ciclo.id}" id="ciclo">
+		<label for="ciclo_id">Elegir ciclo</label>
+		<select class="form-control selectpicker" th:field="*{ciclo_id.id}" id="ciclo_id">
 			<option th:each="ciclo  : ${ciclos}" th:value="${ciclo.id}" th:text="${ciclo.nombre}">
 			
 			</option>

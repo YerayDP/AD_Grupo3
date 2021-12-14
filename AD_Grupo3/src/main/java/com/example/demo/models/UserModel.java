@@ -1,5 +1,7 @@
 package com.example.demo.models;
 
+import com.example.demo.entity.Ciclo;
+
 public class UserModel {
 
 
@@ -12,7 +14,7 @@ public class UserModel {
 	private String empresa;
 	private String role;
 	private boolean activo;
-	private CicloModel ciclo_id;
+	private Ciclo ciclo_id;
 
 	
 
@@ -21,7 +23,7 @@ public class UserModel {
 	}
 
 	public UserModel(int id, String nombre, String apellidos, String email, String password, String telefono,
-			String empresa, String role,boolean activo, CicloModel ciclo_id) {
+			String empresa, String role,boolean activo, Ciclo ciclo_id) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -99,11 +101,11 @@ public class UserModel {
 		this.empresa = empresa;
 	}
 
-	public CicloModel getCiclo_id() {
+	public Ciclo getCiclo_id() {
 		return ciclo_id;
 	}
 
-	public void setCiclo_id(CicloModel ciclo_id) {
+	public void setCiclo_id(Ciclo ciclo_id) {
 		this.ciclo_id = ciclo_id;
 	}
 

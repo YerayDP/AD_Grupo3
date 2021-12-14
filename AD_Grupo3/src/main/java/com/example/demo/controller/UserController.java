@@ -111,6 +111,8 @@ public class UserController {
 				
 		return route;
 	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/activate/{id}")
 	public String activateUser(@PathVariable("id")long id)
 	{
@@ -128,6 +130,8 @@ public class UserController {
 
 	
 	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/deactivate/{id}")
 	public String deactivateUser(@PathVariable("id")long id)
 	{ 
@@ -144,8 +148,8 @@ public class UserController {
 	
 	}
 	
+	
 	@GetMapping(value={"/edit","/edit/{id}"})
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String edit(@PathVariable("id") long id, Model model) {
 		model.addAttribute("ciclos", cicloService.listAllCiclos());
 	    UserModel user = userService.findStudentId(id);
