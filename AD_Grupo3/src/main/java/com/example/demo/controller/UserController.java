@@ -56,7 +56,7 @@ public class UserController {
 	            }
 	            return "index";
 	}
-	
+	 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/indexRRHH")
 	public ModelAndView showRRHH() {
