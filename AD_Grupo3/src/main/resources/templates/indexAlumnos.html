@@ -54,9 +54,9 @@
 	                    <td th:text="${user.telefono}"></td>
 	                    <td th:text="${user.ciclo_id}"></td>
 	                    <td>
-	                    	<a th:href="@{/user/activate/{id}(id=${user.id})}">Activar</a>
-	                    	<a th:href="@{/user/deactivate/{id}(id=${user.id})}">Desactivar</a>
-	                   	 	<a th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a>
+	                    	<a class="btn btn-primary" th:href="@{/user/activate/{id}(id=${user.id})}">Activar</a>
+	                    	<a class="btn btn-primary" th:href="@{/user/deactivate/{id}(id=${user.id})}">Desactivar</a>
+	                   	 	<a class="btn btn-primary" th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a>
 	                    	
 	                    </td>
 	                </tr>

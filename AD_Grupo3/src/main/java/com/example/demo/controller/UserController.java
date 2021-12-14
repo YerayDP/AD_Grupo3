@@ -41,9 +41,7 @@ public class UserController {
 	@Qualifier("cicloService")
 	private CicloService cicloService; 
 	
-	@Autowired
-	@Qualifier("userRepository")
-	private UserRepository userRepository;
+	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
@@ -79,35 +77,35 @@ public class UserController {
 	@GetMapping("/index")
 	public String show(Model model) {
 		String id= SecurityContextHolder.getContext().getAuthentication().getName();
-	    model.addAttribute("users", userRepository.findByEmail(id));
+	    model.addAttribute("users", userService.findStudentMail(id));
 	    return "profile";
 	}
 	
 	@PostMapping("/update/{id}")
-	public String addStudent(@ModelAttribute("user")User userModel,Model model)
+	public String addStudent(@ModelAttribute("user")UserModel userModel, User user)
 	{
 		String route="";
-		if(userModel.getId()==0) {
-			if(userModel.getRole().equals("ROLE_ALUMNO")) {
-				userService.registrar(userModel);
-				userRepository.save(userModel);
+		if(user.getId()==0) {
+			if(user.getRole().equals("ROLE_ALUMNO")) {
+				userService.registrar(user);
+				userService.updateUser(userModel);
 				route= "redirect:/user/indexAlumnos";
 			}
 			else {
-				userService.registrar(userModel);
-				userModel.setRole("ROLE_RRHH");
-				userRepository.save(userModel);
+				userService.registrar(user);
+				user.setRole("ROLE_RRHH");
+				userService.updateUser(userModel);
 				route= "redirect:/user/indexRRHH";
 			}
 		}	
 		else
-			if(userModel.getRole().equals("ROLE_ALUMNO")) {
-				userRepository.save(userModel);
+			if(user.getRole().equals("ROLE_ALUMNO")) {
+				userService.updateUser(userModel);
 				route= "redirect:/user/indexAlumnos";
 			}
 			else {
 				
-				userRepository.save(userModel);
+				userService.updateUser(userModel);
 				route= "redirect:/user/indexRRHH";
 			}
 				
@@ -116,9 +114,9 @@ public class UserController {
 	@GetMapping("/activate/{id}")
 	public String activateUser(@PathVariable("id")long id)
 	{
-		User user = userRepository.findById(id);
+		UserModel user = userService.findStudentId(id);
 		user.setActivo(true);
-		userRepository.save(user);
+		userService.updateUser(user);
 		if(user.getRole().equals("ROLE_ALUMNO")) {
 			
 			return "redirect:/user/indexAlumnos";
@@ -133,9 +131,9 @@ public class UserController {
 	@GetMapping("/deactivate/{id}")
 	public String deactivateUser(@PathVariable("id")long id)
 	{
-		User user = userRepository.findById(id);
+		UserModel user = userService.findStudentId(id);
 		user.setActivo(false);
-		userRepository.save(user);
+		userService.updateUser(user);
 		if(user.getRole().equals("ROLE_ALUMNO")) {
 			
 			return "redirect:/user/indexAlumnos";
@@ -150,7 +148,7 @@ public class UserController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String edit(@PathVariable("id") long id, Model model) {
 		model.addAttribute("ciclos", cicloService.listAllCiclos());
-	    User user = userRepository.findById(id);
+	    UserModel user = userService.findStudentId(id);
 	    model.addAttribute("user", user);
 	    
 	    user.setPassword("");
@@ -168,7 +166,7 @@ public class UserController {
 	@GetMapping("/delete/{id}")
 	public String deleteUser(@PathVariable("id")long id)
 	{
-		User user = userRepository.findById(id);
+		UserModel user = userService.findStudentId(id);
 		
 		if(user.getRole().equals("ROLE_ALUMNO")) {
 			userService.removeUser(id);

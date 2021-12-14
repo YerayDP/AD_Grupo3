@@ -28,13 +28,15 @@ public class UserService implements UserDetailsService{
 	@Qualifier("userRepository")
 	private UserRepository userRepository;
 	
+	
+	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	
 	public com.example.demo.entity.User registrar(com.example.demo.entity.User user){
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		user.setActivo(true);
+		user.setActivo(false);
 		user.setRole("ROLE_ALUMNO");
 		return userRepository.save(user);
 	}
@@ -57,7 +59,7 @@ public class UserService implements UserDetailsService{
 		return builder.build();
 	}
 	
-	public UserDetails findUserId(int id) throws UsernameNotFoundException {
+	public UserDetails findUserId(long id) throws UsernameNotFoundException {
 		com.example.demo.entity.User usuario=userRepository.findById(id);
 		String username=usuario.getEmail();
 		UserBuilder builder=null;
@@ -87,7 +89,7 @@ public class UserService implements UserDetailsService{
 	}
 	
 	
-	public UserModel findStudentId (int id) {
+	public UserModel findStudentId (long id) {
 		
 		return transform (userRepository.findById(id));
 		
@@ -100,11 +102,19 @@ public class UserService implements UserDetailsService{
 	public int removeUser(long id) {
 		userRepository.deleteById(id);
 		return 0;
-	} 
+	}
 	
-
+	public com.example.demo.entity.User updateUser(UserModel userModel) {
+		userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
+		return userRepository.save(transform(userModel));
+		
+	}
 	
-	
+	public UserModel findStudentMail (String id) {
+		
+		return transform (userRepository.findByEmail(id));
+		
+	}
 	
 	
 	

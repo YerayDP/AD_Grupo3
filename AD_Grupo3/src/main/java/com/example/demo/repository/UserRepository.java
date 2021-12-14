@@ -13,9 +13,12 @@ import com.example.demo.models.UserModel;
 public interface UserRepository extends JpaRepository <User, Serializable>{
 
 	public abstract User findByEmail(String email);
+	
 	public abstract User findById(long id);
 	public abstract List<User> findByRole(String role);
 	public abstract User findByCiclo_id(long id);
+
+
 	
 	
 }

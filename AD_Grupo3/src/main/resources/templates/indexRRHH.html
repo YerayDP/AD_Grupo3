@@ -50,8 +50,8 @@
 	                    <td th:text="${user.telefono}"></td>
 	                    <td th:text="${user.empresa}"></td>
 	                 
-	                    <td><a th:href="@{/user/edit/{id}(id=${user.id})}">Edit</a>
-	                    <a th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a></td>
+	                    <td><a class="btn btn-primary" th:href="@{/user/edit/{id}(id=${user.id})}">Edit</a>
+	                    <a class="btn btn-primary" th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a></td>
 	                </tr>
       
             </tbody>
