@@ -1,10 +1,12 @@
 package com.example.demo.controller;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -15,13 +17,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.User;
-import com.example.demo.models.CicloModel;
 import com.example.demo.models.UserModel;
-import com.example.demo.repository.UserRepository;
-import com.example.demo.repository.cicloRepository;
 import com.example.demo.service.impl.UserService;
 import com.example.demo.service.CicloService;
 
@@ -41,14 +42,21 @@ public class UserController {
 	@Qualifier("cicloService")
 	private CicloService cicloService; 
 	
-	
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
-	
-	
 	@GetMapping("/")
-	public String Volver() {
-	    return "index";
+	public String Volver(Authentication auth,HttpSession session, 
+            @RequestParam(value="logout", required=false) String logout, RedirectAttributes redirect)
+	{
+	        
+	            String username = auth.getName();
+
+	            if(session.getAttribute("usuario")==null) {
+
+	                UserModel usuario = userService.findStudentMail(username);
+
+	                if(usuario.isActivo()==false)
+	                    return "redirect:/aa?";
+	            }
+	            return "index";
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
