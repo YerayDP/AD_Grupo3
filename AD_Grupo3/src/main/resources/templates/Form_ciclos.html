@@ -32,9 +32,7 @@
                 	<a class="btn btn-primary" th:href="@{/auth/registerForm}">Registrarse</a>
                 </div>
             </div>
-            <div sec:authorize ="isAuthenticated()" class="nav-item">
-            <a class="btn btn-primary" th:href="@{/user/index}">Perfil</a>
-            </div>
+            
             
         </nav>
 

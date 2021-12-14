@@ -17,10 +17,6 @@
         <link th:href="@{/css/styles.css}" rel="stylesheet" />
 </head>
 <a class="btn btn-primary" th:href="@{/}">Volver</a>
-<div class="row justify-content-center">
-    <div class="col-xl-6">
-    	<div class="text-center">
-<body>
 
 <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
@@ -38,6 +34,11 @@
             </div>
             
         </nav>
+        
+        <div class="row justify-content-center">
+    <div class="col-xl-6">
+    	<div class="text-center">
+<body>
         
 <a th:href="@{/user/addRRHH}" class="btn btn-primary">Nuevo recursos humanos</a>
 <div th:switch="${users}">

@@ -3,7 +3,7 @@
 <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
+        <meta name="description" content="" />   
         <meta name="author" content="" />
         <title>Login</title>
         <!-- Favicon-->
@@ -35,9 +35,7 @@
                 	<a class="btn btn-primary" th:href="@{/auth/registerForm}">Registrarse</a>
                 </div>
             </div>
-            <div sec:authorize ="isAuthenticated()" class="nav-item">
-            <a class="btn btn-primary" th:href="@{/user/index}">Perfil</a>
-            </div>
+            
             
         </nav>
 

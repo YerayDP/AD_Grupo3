@@ -18,10 +18,7 @@
 </head>
 <a class="btn btn-primary" th:href="@{/}">Volver</a>
 
-<div class="row justify-content-center">
-    <div class="col-xl-6">
-    	<div class="text-center">
-<body>
+
 
 <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
@@ -41,7 +38,10 @@
             </div>
             
         </nav>
-
+<div class="row justify-content-center">
+    <div class="col-xl-6">
+    	<div class="text-center">
+<body>
 <div th:switch="${users}">
     <h2 th:case="null">No users yet!</h2>
         <div th:case="*">
