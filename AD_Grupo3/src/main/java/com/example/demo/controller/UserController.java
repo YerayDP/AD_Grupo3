@@ -130,11 +130,11 @@ public class UserController {
 	}
 	@GetMapping("/deactivate/{id}")
 	public String deactivateUser(@PathVariable("id")long id)
-	{
+	{ 
 		UserModel user = userService.findStudentId(id);
 		user.setActivo(false);
 		userService.updateUser(user);
-		if(user.getRole().equals("ROLE_ALUMNO")) {
+		if(user.getRole().equals("ROLE_ALUMNO")) { 
 			
 			return "redirect:/user/indexAlumnos";
 		}
