@@ -82,33 +82,38 @@ public class UserController {
 	}
 	
 	@PostMapping("/update/{id}")
-	public String addStudent(@ModelAttribute("user")UserModel userModel, User user)
+	public String addStudent(UserModel userModel, User user)
 	{
+		String id= SecurityContextHolder.getContext().getAuthentication().getName();
+		UserModel userM=userService.findStudentMail(id);
 		String route="";
-		if(user.getId()==0) {
-			if(user.getRole().equals("ROLE_ALUMNO")) {
-				userService.registrar(user);
-				userService.updateUser(userModel);
-				route= "redirect:/user/indexAlumnos";
-			}
+		if(userM.getRole().equals("ROLE_ADMIN")) {
+			if(user.getId()==0) {
+					userService.registrar(user);
+					route= "redirect:/user/indexRRHH";
+				}
 			else {
-				userService.registrar(user);
-				user.setRole("ROLE_RRHH");
 				userService.updateUser(userModel);
-				route= "redirect:/user/indexRRHH";
+				if(user.getRole().equals("ROLE_ALUMNO")) {
+					
+					route= "redirect:/user/indexALUMNO";
+				}
+				else {
+					route= "redirect:/user/indexALUMNO";
+				}
 			}
-		}	
-		else
-			if(user.getRole().equals("ROLE_ALUMNO")) {
+		}
+			
+		else if(userM.getRole().equals("ROLE_RRHH")){
+			
 				userService.updateUser(userModel);
-				route= "redirect:/user/indexAlumnos";
-			}
-			else {
-				
-				userService.updateUser(userModel);
-				route= "redirect:/user/indexRRHH";
-			}
-				
+				route= "redirect:/user/index";
+
+		}
+		else {
+			userService.updateUser(userModel);
+			route= "redirect:/user/index";
+		}
 		return route;
 	}
 	

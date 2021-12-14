@@ -64,15 +64,10 @@ public class UserService implements UserDetailsService{
 		String username=usuario.getEmail();
 		UserBuilder builder=null;
 		
-		if(usuario!=null)
-		{
-			builder=User.withUsername(username);
-			builder.disabled(false);
-			builder.password(usuario.getPassword());
-			builder.authorities(new SimpleGrantedAuthority(usuario.getRole()));
-		}
-		else
-			throw new UsernameNotFoundException("Usuario no encontrado");
+		builder=User.withUsername(username);
+		builder.disabled(false);
+		builder.password(usuario.getPassword());
+		builder.authorities(new SimpleGrantedAuthority(usuario.getRole()));
 		return builder.build();
 	}
 	
