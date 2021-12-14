@@ -33,7 +33,10 @@
                 </div>
             </div>
             <div sec:authorize ="isAuthenticated()" class="nav-item">
-            <a class="btn btn-primary" th:href="@{/user/index}">Perfil</a>
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ALUMNO'')') }">
+            <a class="btn btn-primary" th:href="@{/user/index}">Perfil</a></div>
+            <div th:if="${#authorization.expression('hasRole(''ROLE_RRHH'')') }">
+            <a class="btn btn-primary" th:href="@{/user/index}">Perfil</a></div>           
             </div>
             
         </nav>
@@ -91,7 +94,7 @@
         <!-- Icons Grid-->
         
         <!-- Footer-->
-        <footer class="footer bg-light">
+        <footer class="footer bg-dark">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 h-100 text-center text-lg-start my-auto">

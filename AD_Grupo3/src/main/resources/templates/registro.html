@@ -25,21 +25,21 @@
                             <div class="container">
 <form th:action="@{/auth/register}" th:object="${user}" method="post">
 
-<input type="hidden" th:field="*{id}" class="form-control" placeholder="ID" name="id"/>
+<input type="hidden" th:field="*{id}" class="form-control" name="id"/>
 
 <div class="form-label-group">
 <label>Nombre</label>
-<input type="text" th:field="*{nombre}" class="form-control" placeholder="Nombre" name="nombre"/>
+<input type="text" th:field="*{nombre}" class="form-control" name="nombre"/>
 </div>
 
 <div class="form-label-group">
 <label>Apellidos</label>
-<input type="text" th:field="*{apellidos}" class="form-control" placeholder="Apellidos" name="apellidos"/>
+<input type="text" th:field="*{apellidos}" class="form-control" name="apellidos"/>
 </div>
 
 <div class="form-label-group">
 <label>Telefono</label>
-<input type="text" th:field="*{telefono}" class="form-control" placeholder="telefono" name="telefono"/>
+<input type="text" th:field="*{telefono}" class="form-control" name="telefono"/>
 </div>
 
 <div class="form-label-group">
@@ -51,15 +51,15 @@
 
 <div class="form-label-group">
 <label>Email</label>
-<input type="text" th:field="*{email}" class="form-control" placeholder="email" name="email"/>
+<input type="text" th:field="*{email}" class="form-control" name="email"/>
 </div>
 
 <div>
 <label>Password</label>
-<input type="password" th:field="*{password}" class="form-control" placeholder="Password" name="password"/>
+<input type="password" th:field="*{password}" class="form-control" name="password"/>
 </div>
 
-<input class="btn btn-lg byn-primary btn-block text-uppercase" id="boton" type="submit" value="Sign Up"/>
+<input class="btn btn-lg btn-primary text-uppercase" id="boton" type="submit" value="Sign Up"/>
 
 </form>
 </div>

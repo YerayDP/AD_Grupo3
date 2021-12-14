@@ -21,7 +21,28 @@
     <div class="col-xl-6">
     	<div class="text-center">
 <body>
-<a th:href="@{/user/addRRHH}" class="btn btn-primary">Nuevo RRHH</a>
+
+<nav class="navbar navbar-light bg-light static-top">
+            <div class="container">
+                <div sec:authorize ="isAuthenticated()" class="nav-item">
+		        	<form class="form-inline" th:action="@{/logout}" method="post">
+						<button class="btn btn-link" type="submit">Logout</button>
+					</form>
+		        	
+					<div><i class="bi bi-person-circle"></i> <span sec:authentication="name"></span></div>
+		        </div>
+		        <div sec:authorize ="!isAuthenticated()" class="nav-item">
+                	<a class="btn btn-primary" th:href="@{/auth/login}">Iniciar sesion</a>
+                	<a class="btn btn-primary" th:href="@{/auth/registerForm}">Registrarse</a>
+                </div>
+            </div>
+            <div sec:authorize ="isAuthenticated()" class="nav-item">
+            <a class="btn btn-primary" th:href="@{/user/index}">Perfil</a>
+            </div>
+            
+        </nav>
+        
+<a th:href="@{/user/addRRHH}" class="btn btn-primary">Nuevo recursos humanos</a>
 <div th:switch="${users}">
     <h2 th:case="null">No users yet!</h2>
         <div th:case="*">
