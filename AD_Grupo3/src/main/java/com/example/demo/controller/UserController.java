@@ -90,7 +90,7 @@ public class UserController {
 		if(userM.getRole().equals("ROLE_ADMIN")) {
 			if(user.getId()==0) {
 					
-					userService.registrar(user);
+					userService.registrarRRHH(user);
 					route= "redirect:/user/indexRRHH";
 				}
 			else {
