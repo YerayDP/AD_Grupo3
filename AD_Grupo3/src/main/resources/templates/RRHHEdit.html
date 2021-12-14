@@ -24,7 +24,7 @@
 <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <div sec:authorize ="isAuthenticated()" class="nav-item">
-		        	<form class="form-inline" th:action="@{/logout}" method="post">
+		        	<form class="form-inline" th:action="@{/logout}" th:object="${user}" method="post">
 						<button class="btn btn-link" type="submit">Logout</button>
 					</form>
 		        	
@@ -52,16 +52,19 @@
 	<div class="form-group">
 		<label for="nombre">Nombre</label>
 		<input type="text" th:field="*{nombre}" class="form-control" id="nombre" placeholder="Enter nombre">
+		<span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Name Error</span>
 	</div>
 	<div class="form-group">
 		<label for="apellidos">Apellidos</label>
 		<input type="text" th:field="*{apellidos}" class="form-control" id="apellidos" placeholder="Enter Firstname">
+		<td th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}">Name Error</td>
 	</div>
 	
 	<div th:if="${#authorization.expression('hasRole(''ROLE_RRHH'')') }">
 		<label for="Email">Email</label>
 		<input th:readonly="true" type="email" th:field="*{email}" class="form=control" id="email"
 		placeholder="Enter Mail">
+		<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</td>
 	</div>
 	<div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
     	<label for="Email">Email</label>
@@ -71,16 +74,17 @@
 	<div>
 		<label for="password">Password</label>
 		<input th:field="*{password}" class="form-control" id="password" placeholder="Enter password">
+		<td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</td>
 	</div>
 	<div class="form-group">
 		<label for="telefono">Telefono</label>
-		<input type="text" th:field="*{telefono}" class="form-control" id="telefono"
-		placeholder="Enter Telefono">
+		<input type="text" th:field="*{telefono}" class="form-control" id="telefono" placeholder="Enter Telefono">
+		<td th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}">Name Error</td>
 	</div>
 	<div class="form-group">
 		<label for="empresa">Empresa</label>
-		<input type="text" th:field="*{empresa}" class="form-control" id="empresa"
-		placeholder="Enter Empresa">
+		<input type="text" th:field="*{empresa}" class="form-control" id="empresa" placeholder="Enter Empresa">
+		<td th:if="${#fields.hasErrors('empresa')}" th:errors="*{empresa}">Name Error</td>
 	</div>
 	<input id="role" name="role" type="hidden" value="ROLE_RRHH"/> 
 

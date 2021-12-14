@@ -38,7 +38,6 @@
                 </div>
             </div>
             <div sec:authorize ="isAuthenticated()" class="nav-item">
-            <a class="btn btn-primary" th:href="@{/user/index}">Perfil</a>
             </div>
             
         </nav>
@@ -68,15 +67,17 @@
 	                    <td th:text="${user.id}"></td>
 	                    <td th:text="${user.nombre}"></td>
 	                    <td th:text="${user.apellidos}"></td>
-	                    <td th:text="${user.activo}"></td>
+	                    <td>
+	                    	<span th:if="${user.activo}==true"><i class="bi bi-check"></i></span>
+							<span th:if="${user.activo}==false"><i class="bi bi-x"></i></span>
+	                    </td>
 	                    <td th:text="${user.email}"></td>
 	                    <td th:text="${user.telefono}"></td>
 	                    <td th:text="${user.ciclo_id}"></td>
 	                    <td>
-	                    	<a class="btn btn-primary" th:href="@{/user/activate/{id}(id=${user.id})}">Activar</a>
-	                    	<a class="btn btn-primary" th:href="@{/user/deactivate/{id}(id=${user.id})}">Desactivar</a>
-	                   	 	<a class="btn btn-primary" th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a>
-	                    	
+	                    	<span th:if="${user.activo}==false"><a class="btn btn-primary btn-sm" th:href="@{/user/activate/{id}(id=${user.id})}">Activar</a></span>
+							<span th:if="${user.activo}==true"><a class="btn btn-primary btn-sm" th:href="@{/user/deactivate/{id}(id=${user.id})}">Desactivar</a></span>
+	                   	 	<a class="btn btn-danger btn-sm" th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a>
 	                    </td>
 	                </tr>
           

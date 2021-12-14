@@ -59,9 +59,13 @@ public class UserController {
 	    return mav;
 	}
 	@GetMapping("/addRRHH")
-	public String addRRHH(@ModelAttribute("user")User User,Model model)
+	public String addRRHH(@ModelAttribute("user")User User,Model model,
+			@Valid User user, BindingResult result)
 	{
-		return "RRHHEdit";
+		if (result.hasErrors()) {
+			return "RRHHEdit";
+		}
+		return "redirect:/user/indexRRHH";
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
