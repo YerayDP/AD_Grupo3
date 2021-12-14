@@ -43,10 +43,8 @@ public class UserController {
 	private CicloService cicloService; 
 	
 	@GetMapping("/")
-	public String Volver(Authentication auth,HttpSession session, 
-            @RequestParam(value="logout", required=false) String logout, RedirectAttributes redirect)
-	{
-	        
+	public String Volver(Authentication auth,HttpSession session)
+	{	        
 	            String username = auth.getName();
 
 	            if(session.getAttribute("usuario")==null) {
