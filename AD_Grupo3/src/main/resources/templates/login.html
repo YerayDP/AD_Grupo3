@@ -23,7 +23,15 @@
                     <div class="col-xl-6">
                         <div class="text-center">
                             <h1>Login page</h1>
-						    <p th:if="${loginError}" class="error">Wrong user or password</p>
+						    
+							<div class="alert alert-danger text-center" th:if="${loginError}">
+								Datos invalidos	
+							</div>
+							
+							<div class="alert alert-success text-center" th:if="${logout}">
+								Sesion cerrada	
+							</div>
+
 						    <form th:action="@{/auth/login}" method="post">
 						    <input type="hidden" name="${ csrf.parameterName}" value="${ csrf.token}"/>
 						    
@@ -34,7 +42,7 @@
 
 					      	<div class="input-group mb-3">
 							  <label for="Password">Password : </label>
-							  	<input type="text" class="form-control form-control-sm" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="password" name="password" autofocus="autofocus">
+							  	<input type="password" class="form-control form-control-sm" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="password" name="password" autofocus="autofocus">
 							</div>
 		
 					     	<input class="btn btn-primary" type="submit" value="Login"/>

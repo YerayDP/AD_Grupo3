@@ -28,12 +28,11 @@ public class LoginController {
 	
 	@GetMapping("/auth/login")
 	public String login(Model model, @RequestParam(name="error", required=false) String error,
-			@RequestParam(name="logout", required=false) String logout)
+			@RequestParam(name="logout", required=false) String logout, RedirectAttributes flash)
 	{
 		model.addAttribute("user",new User());
 		model.addAttribute("error",error);
-		//, RedirectAttributes flash
-		//flash.addFlashAttribute("success", "Sesion cerrada correctamente");
+		flash.addFlashAttribute("success", "Sesión cerrada correctamente");
 		model.addAttribute("logout",logout);
 		return "login";
 	}
