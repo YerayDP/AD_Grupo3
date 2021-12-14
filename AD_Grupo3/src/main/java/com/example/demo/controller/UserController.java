@@ -61,7 +61,6 @@ public class UserController {
 	@GetMapping("/addRRHH")
 	public String addRRHH(@ModelAttribute("user")User User,Model model)
 	{
-		
 		return "RRHHEdit";
 	}
 	

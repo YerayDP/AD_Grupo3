@@ -86,6 +86,17 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                    <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')') }">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center">
+                            	¿Desea ver todos los ciclos disponibles en el centro en este momento?
+                            </div>
+                            <a class="btn btn-primary btn-xl" text-align="center" th:href="@{/ciclos/listCiclos}">Ver ciclos</a>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </header>

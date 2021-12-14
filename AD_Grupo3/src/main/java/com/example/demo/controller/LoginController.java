@@ -27,14 +27,18 @@ public class LoginController {
 	private CicloService cicloService;
 	
 	@GetMapping("/auth/login")
-	public String login(Model model, @RequestParam(name="error", required=false) String error,
+	public ModelAndView login(Model model, @RequestParam(name="error", required=false) String error,
 			@RequestParam(name="logout", required=false) String logout, RedirectAttributes flash)
 	{
-		model.addAttribute("user",new User());
-		model.addAttribute("error",error);
-		flash.addFlashAttribute("success", "Sesión cerrada correctamente");
-		model.addAttribute("logout",logout);
-		return "login";
+		ModelAndView mav = new ModelAndView();
+		if(logout != null)
+		{
+			//model.addAttribute("user",new User());
+			//flash.addFlashAttribute("success", "Sesión cerrada correctamente");
+			mav.addObject("msg", "Sesion cerrada correctamente.");
+		}
+		mav.setViewName("login");
+		return mav;
 	}
 	
 	@GetMapping("/auth/registerForm")

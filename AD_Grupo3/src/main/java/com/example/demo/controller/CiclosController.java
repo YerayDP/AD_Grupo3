@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,7 @@ public class CiclosController {
 		return mav;
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/addCiclo")
 	public String addCiclo(@ModelAttribute("ciclo")CicloModel CicloModel,Model model)
 	{
@@ -45,6 +47,7 @@ public class CiclosController {
 		return "redirect:/ciclos/listCiclos";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping(value={"/formCiclo/", "/formCiclo/{id}"})
 	public String formCiclo(@PathVariable(name="id", required=false)Integer id,Model model)
 	{
@@ -55,6 +58,7 @@ public class CiclosController {
 		return FORM;
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/delete/{id}")
 	public String deleteCiclo(@PathVariable("id")int id)
 	{
