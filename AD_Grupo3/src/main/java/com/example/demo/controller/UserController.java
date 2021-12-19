@@ -25,13 +25,11 @@ import com.example.demo.entity.User;
 import com.example.demo.models.UserModel;
 import com.example.demo.service.impl.UserService;
 import com.example.demo.service.CicloService;
-
+import com.example.demo.service.NoticiaService;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	private static  String USER_VIEW="User";
-	private static  String INDEX_VIEW="index";
 	private static  String INDEXALU_VIEW="indexAlumnos";
 	private static  String INDEXRRHH_VIEW="indexRRHH";
 	@Autowired
@@ -40,11 +38,17 @@ public class UserController {
 	
 	@Autowired
 	@Qualifier("cicloService")
-	private CicloService cicloService; 
+	private CicloService cicloService;
+	
+	/*@Autowired
+	@Qualifier("noticiaService")
+	private NoticiaService noticiaService;*/
 	
 	@GetMapping("/")
-	public String Volver(Authentication auth,HttpSession session)
-	{	        
+	public ModelAndView Volver(Authentication auth,HttpSession session)
+	{	    
+		ModelAndView mav = new ModelAndView();
+		//mav.addObject("noticias", noticiaService.listAllNoticias());
 	            String username = auth.getName();
 
 	            if(session.getAttribute("usuario")==null) {
@@ -52,9 +56,11 @@ public class UserController {
 	                UserModel usuario = userService.findStudentMail(username);
 
 	                if(usuario.isActivo()==false)
-	                    return "redirect:/aa?";
+	                	mav.setViewName("login");
+	                    return mav;
 	            }
-	            return "index";
+	            mav.setViewName("index");
+	            return mav;
 	}
 	 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")

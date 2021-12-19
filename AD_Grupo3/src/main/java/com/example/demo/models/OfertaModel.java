@@ -7,7 +7,6 @@ public class OfertaModel {
 	
 	
     private int id;
-	
 	private String titular;
 	private String descripcion;
 	private String requisitos;
