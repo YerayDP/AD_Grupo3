@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Login</title>
+        <title>Ciclos</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" th:href="@{/static/assets/favicon.ico}" />
         <!-- Bootstrap icons-->
@@ -17,57 +17,48 @@
         <link th:href="@{/css/styles.css}" rel="stylesheet" />
 </head>
 <body>
-<header class="masthead">
-            <div class="container position-relative">
-                <div class="row justify-content-center">
-                    <div class="col-xl-6">
-                        <div class="text-center">
-                            <div class="container">
-<form th:action="@{/auth/register}" th:object="${user}" method="post">
 
-<input type="hidden" th:field="*{id}" class="form-control" name="id"/>
-
-<div class="form-label-group">
-<label>Nombre</label>
-<input type="text" th:field="*{nombre}" class="form-control" name="nombre"/>
-</div>
-
-<div class="form-label-group">
-<label>Apellidos</label>
-<input type="text" th:field="*{apellidos}" class="form-control" name="apellidos"/>
-</div>
-
-<div class="form-label-group">
-<label>Telefono</label>
-<input type="text" th:field="*{telefono}" class="form-control" name="telefono"/>
-</div>
-
-<div class="form-label-group">
-<label>Ciclo</label>
-<select class="form-control selectpicker" th:field="*{ciclo.id}" id="ciclo">
-			<option th:each="ciclo  : ${ciclos}" th:value="${ciclo.id}" th:text="${ciclo.nombre}"></option>
-</select>
-</div>
-
-<div class="form-label-group">
-<label>Email</label>
-<input type="text" th:field="*{email}" class="form-control" name="email"/>
-</div>
-
-<div>
-<label>Password</label>
-<input type="password" th:field="*{password}" class="form-control" name="password"/>
-</div>
-
-<input class="btn btn-lg btn-primary text-uppercase" id="boton" type="submit" value="Sign Up"/>
-
-</form>
-</div>
-                        </div>
-                    </div>
+<nav class="navbar navbar-light bg-light static-top">
+            <div class="container">
+                <div sec:authorize ="isAuthenticated()" class="nav-item">
+		        	<form class="form-inline" th:action="@{/logout}" method="post">
+						<button class="btn btn-link" type="submit">Logout</button>
+					</form>
+		        	
+					<div><i class="bi bi-person-circle"></i> <span sec:authentication="name"></span></div>
+		        </div>
+		        <div sec:authorize ="!isAuthenticated()" class="nav-item">
+                	<a class="btn btn-primary" th:href="@{/auth/login}">Iniciar sesion</a>
+                	<a class="btn btn-primary" th:href="@{/auth/registerForm}">Registrarse</a>
                 </div>
             </div>
-        </header>
+            
+            
+        </nav>
+
+<form action="#" th:action="@{/ofertas/addOferta}" th:object="${oferta}" method="post">
+
+	<div>
+		<input type="hidden" th:field="*{id}" class="form-control" id="id" placeholder="Enter id">
+	</div>
+	
+	<div>
+		<label for="titular">Titular</label>
+		<input type="text" th:field="*{titular}" class="form-control" id="titular" placeholder="Enter titular">
+	</div>
+	
+	<div>
+		<label for="descripcion">Descripcion</label>
+		<input type="text" th:field="*{descripcion}" class="form-control" id="descripcion" placeholder="Enter Descripcion">
+	</div>
+	
+	<div>
+		<label for="numCandidatos">Numero de candidatos</label>
+		<input type="text" th:field="*{numCandidatos}" class="form-control" id="numCandidatos" placeholder="Enter Candidatos">
+	</div>
+	
+	<input type="submit" class="btn btn-primary">
+</form>
 
 <footer class="footer bg-dark">
             <div class="container">

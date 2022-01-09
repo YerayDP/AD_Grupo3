@@ -16,58 +16,76 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link th:href="@{/css/styles.css}" rel="stylesheet" />
 </head>
-<body>
-<header class="masthead">
-            <div class="container position-relative">
-                <div class="row justify-content-center">
-                    <div class="col-xl-6">
-                        <div class="text-center">
-                            <div class="container">
-<form th:action="@{/auth/register}" th:object="${user}" method="post">
+<a class="btn btn-primary" th:href="@{/}">Volver</a>
 
-<input type="hidden" th:field="*{id}" class="form-control" name="id"/>
 
-<div class="form-label-group">
-<label>Nombre</label>
-<input type="text" th:field="*{nombre}" class="form-control" name="nombre"/>
-</div>
 
-<div class="form-label-group">
-<label>Apellidos</label>
-<input type="text" th:field="*{apellidos}" class="form-control" name="apellidos"/>
-</div>
-
-<div class="form-label-group">
-<label>Telefono</label>
-<input type="text" th:field="*{telefono}" class="form-control" name="telefono"/>
-</div>
-
-<div class="form-label-group">
-<label>Ciclo</label>
-<select class="form-control selectpicker" th:field="*{ciclo.id}" id="ciclo">
-			<option th:each="ciclo  : ${ciclos}" th:value="${ciclo.id}" th:text="${ciclo.nombre}"></option>
-</select>
-</div>
-
-<div class="form-label-group">
-<label>Email</label>
-<input type="text" th:field="*{email}" class="form-control" name="email"/>
-</div>
-
-<div>
-<label>Password</label>
-<input type="password" th:field="*{password}" class="form-control" name="password"/>
-</div>
-
-<input class="btn btn-lg btn-primary text-uppercase" id="boton" type="submit" value="Sign Up"/>
-
-</form>
-</div>
-                        </div>
-                    </div>
+<nav class="navbar navbar-light bg-light static-top">
+            <div class="container">
+                <div sec:authorize ="isAuthenticated()" class="nav-item">
+		        	<form class="form-inline" th:action="@{/logout}" method="post">
+						<button class="btn btn-link" type="submit">Logout</button>
+					</form>
+		        	
+					<div><i class="bi bi-person-circle"></i> <span sec:authentication="name"></span></div>
+		        </div>
+		        <div sec:authorize ="!isAuthenticated()" class="nav-item">
+                	<a class="btn btn-primary" th:href="@{/auth/login}">Iniciar sesion</a>
+                	<a class="btn btn-primary" th:href="@{/auth/registerForm}">Registrarse</a>
                 </div>
             </div>
-        </header>
+            <div sec:authorize ="isAuthenticated()" class="nav-item">
+            </div>
+            
+        </nav>
+<div class="row justify-content-center">
+    <div class="col-xl-6">
+    	<div class="text-center">
+<body>
+<div th:switch="${users}">
+    <h2 th:case="null">No users yet!</h2>
+        <div th:case="*">
+            
+            <table class="table table-bordered">
+  					<thead class="table-dark">
+                    <tr>
+                    	<th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col" >Apellido</th>
+                        <th scope="col">Activo</th>
+                        <th scope="col">Email</th>  
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Ciclo</th>
+                        <th scope="col">Acciones</th>
+             
+                    
+                    </tr>
+                </thead>
+                <tbody>
+           
+	                <tr th:each="user : ${users}">
+	                    <td th:text="${user.id}"></td>
+	                    <td th:text="${user.nombre}"></td>
+	                    <td th:text="${user.apellidos}"></td>
+	                    <td>
+	                    	<span th:if="${user.activo}==true"><i class="bi bi-check"></i></span>
+							<span th:if="${user.activo}==false"><i class="bi bi-x"></i></span>
+	                    </td>
+	                    <td th:text="${user.email}"></td>
+	                    <td th:text="${user.telefono}"></td>
+	                    <td th:text="${user.ciclo_id}"></td>
+	                    <td>
+	                    	<span th:if="${user.activo}==false"><a class="btn btn-primary btn-sm" th:href="@{/user/activate/{id}(id=${user.id})}">Activar</a></span>
+							<span th:if="${user.activo}==true"><a class="btn btn-primary btn-sm" th:href="@{/user/deactivate/{id}(id=${user.id})}">Desactivar</a></span>
+	                   	 	<a class="btn btn-danger btn-sm" th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a>
+	                    </td>
+	                </tr>
+          
+            </tbody>
+        </table>
+    </div>      
+</div>
+
 
 <footer class="footer bg-dark">
             <div class="container">
@@ -101,6 +119,7 @@
             </div>
         </footer>
 
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script th:src="@{/static/js/scripts.js}"></script>
@@ -110,4 +129,7 @@
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
+</div>
+</div>
+</div>
 </html>
