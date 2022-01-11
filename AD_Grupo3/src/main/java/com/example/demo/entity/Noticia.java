@@ -23,6 +23,12 @@ public class Noticia {
 	@ManyToOne
 	@JoinColumn(name="cicloId")
 	private Ciclo ciclo;
+	
+	
+
+	public Noticia() {
+		super();
+	}
 
 	public Noticia(int id, String titulo, String descripcion, String imagen, Ciclo ciclo) {
 		super();
