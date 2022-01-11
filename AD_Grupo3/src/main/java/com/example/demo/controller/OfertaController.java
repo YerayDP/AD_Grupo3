@@ -21,16 +21,17 @@ import com.example.demo.service.OfertaService;
 public class OfertaController {
 
 		@Autowired
+		@Qualifier("ofertaService")
 		private OfertaService ofertaService;
 		
 		private static  String OFERTAS_VIEW="ofertas";
 		private static  String FORM="Form_ofertas";
 		
-		@GetMapping("/listOfertas")
-		public ModelAndView listOfertas()
+		@GetMapping("/listOfertas/{id}")
+		public ModelAndView listOfertas(@PathVariable("id") int id)
 		{
 			ModelAndView mav = new ModelAndView(OFERTAS_VIEW);
-			mav.addObject("ofertas", ofertaService.listAllOfertas());
+			mav.addObject("ofertas", ofertaService.findByUsuario(id));
 			return mav; 
 		}
 		

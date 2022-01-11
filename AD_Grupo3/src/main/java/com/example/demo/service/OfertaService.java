@@ -12,6 +12,7 @@ public interface OfertaService {
 	int removeOferta(int id);
 	Oferta updateOferta(OfertaModel OfertaModel);
 	OfertaModel findOferta(int id);
-	abstract List<OfertaModel> listAllOfertas(OfertaModel OfertaModel);
+	List<OfertaModel> findByUsuario(int usuario);
+	//abstract List<OfertaModel> listAllOfertas(OfertaModel OfertaModel);
 	
 }

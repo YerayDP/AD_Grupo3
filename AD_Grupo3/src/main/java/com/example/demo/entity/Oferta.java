@@ -11,10 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
 @Entity
 public class Oferta {
 
-	
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
