@@ -19,6 +19,9 @@
 			<th scope="col">Titulo</th>
 			<th scope="col">Descripcion</th>
 			<th scope="col">Requisitos</th>
+			<th scope="col">Candidatos</th>
+			<th scope="col">Fecha maxima</th>
+			<th scope="col">Acciones</th>
 		</tr>
 	</thead>
 	
@@ -27,7 +30,13 @@
 			<th th:text=${oferta.titular}></th>
 			<th th:text=${oferta.descripcion}></th>
 			<th th:text=${oferta.requisitos}></th>
-		</tr>		
+			<th th:text=${oferta.numCandidatos}></th>
+			<th th:text=${oferta.fechamax}></th>
+			<th> 
+				<a th:href="@{/ofertas/formOferta/} + ${oferta.id}" class="btn btn-primary">Editar</a>
+				<a th:href="@{/ofertas/delete/} + ${oferta.id}" class="btn btn-primary">Borrar</a>
+			</th>
+		</tr>
 	</tbody>
 
 </table>
@@ -42,6 +51,6 @@
         </header>
 
 
-<footer th:replace="Base :: foteer"></footer>
+<footer th:replace="Base :: footer"></footer>
 </body>
 </html>

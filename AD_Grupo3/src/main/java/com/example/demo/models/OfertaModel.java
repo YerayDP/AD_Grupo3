@@ -4,8 +4,6 @@ import java.sql.Date;
 
 public class OfertaModel {
 
-	
-	
     private int id;
 	private String titular;
 	private String descripcion;
@@ -14,10 +12,6 @@ public class OfertaModel {
 	private UserModel usuario_id;
 	private int numCandidatos;
 	
-	
-	
-	
-
 	public OfertaModel() {
 		super();
 	}

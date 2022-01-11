@@ -18,7 +18,6 @@ import com.example.demo.service.CicloService;
 public class CicloServiceImpl implements CicloService{
 	
 	@Autowired
-	@Qualifier("cicloRepository")
 	private cicloRepository CicloRepository;
 
 	public CicloModel transform(Ciclo Ciclo) 
