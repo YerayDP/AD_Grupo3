@@ -46,7 +46,7 @@ public class NoticiasController {
 		else
 			noticiaService.updateNoticia(NoticiaModel);
 		
-		return "redirect:/noticias/listNoticias";
+		return "redirect:/noticias/listNoticia";
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")

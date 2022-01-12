@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.example.demo.entity.Oferta;
 import com.example.demo.models.OfertaModel;
-import com.example.demo.models.UserModel;
 
 public interface OfertaService {
 
@@ -14,8 +13,8 @@ public interface OfertaService {
 	int removeOferta(int id);
 	Oferta updateOferta(OfertaModel OfertaModel);
 	OfertaModel findOferta(int id);
-	List<OfertaModel> findByUsuario(UserModel user);
-	List<OfertaModel> findByDateBefore(Date fecha);
+	List<OfertaModel> findByUsuario(int usuario);
+	List<OfertaModel> findByFechamaxBefore(Date fecha);
 	//abstract List<OfertaModel> listAllOfertas(OfertaModel OfertaModel);
 	
 }

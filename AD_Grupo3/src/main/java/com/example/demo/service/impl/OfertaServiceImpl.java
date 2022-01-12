@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Oferta;
 import com.example.demo.models.OfertaModel;
-import com.example.demo.models.UserModel;
 import com.example.demo.repository.ofertaRepository;
 import com.example.demo.service.OfertaService;
 
@@ -61,21 +60,16 @@ public class OfertaServiceImpl implements OfertaService{
 		return transform(OfertaRepository.findById(id).orElse(null));
 	}
 	
+	@Override
 	public List<OfertaModel> findByUsuario(int id) {
 		return OfertaRepository.findByUsuario(id).stream()
 				.map(c->transform(c)).collect(Collectors.toList());
 	}
 
 	@Override
-	public List<OfertaModel> findByDateBefore(Date fecha) {
-		return OfertaRepository.findAll().stream()
+	public List<OfertaModel> findByFechamaxBefore(Date fecha) {
+		return OfertaRepository.findByFechamaxBefore(fecha).stream()
 				.map(c->transform(c)).collect(Collectors.toList());
-	}
-
-	@Override
-	public List<OfertaModel> findByUsuario(UserModel user) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 }
