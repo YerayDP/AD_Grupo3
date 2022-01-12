@@ -6,7 +6,6 @@ import java.util.List;
 import com.example.demo.entity.Oferta;
 import com.example.demo.entity.User;
 import com.example.demo.models.OfertaModel;
-import com.example.demo.models.UserModel;
 
 public interface OfertaService {
 
@@ -15,9 +14,15 @@ public interface OfertaService {
 	int removeOferta(int id);
 	Oferta updateOferta(OfertaModel OfertaModel);
 	OfertaModel findOferta(int id);
+<<<<<<< HEAD
 	
 	List<OfertaModel> findByDateBefore(Date fecha);
 	List<OfertaModel> findByUsuario(User u);
 
+=======
+	List<OfertaModel> findByUsuario(int usuario);
+	List<OfertaModel> findByFechamaxBefore(Date fecha);
+	//abstract List<OfertaModel> listAllOfertas(OfertaModel OfertaModel);
+>>>>>>> branch 'Entrega2' of https://github.com/YerayDP/AD_Grupo3.git
 	
 }

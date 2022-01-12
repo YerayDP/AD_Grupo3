@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.entity.Oferta;
 import com.example.demo.entity.User;
 import com.example.demo.models.OfertaModel;
-import com.example.demo.models.UserModel;
 import com.example.demo.repository.ofertaRepository;
 import com.example.demo.service.OfertaService;
 
@@ -62,14 +61,25 @@ public class OfertaServiceImpl implements OfertaService{
 		return transform(OfertaRepository.findById(id).orElse(null));
 	}
 	
+<<<<<<< HEAD
 	public List<OfertaModel> findByUsuario(User i) {
 		return OfertaRepository.findByUsuario(i).stream()
+=======
+	@Override
+	public List<OfertaModel> findByUsuario(int id) {
+		return OfertaRepository.findByUsuario(id).stream()
+>>>>>>> branch 'Entrega2' of https://github.com/YerayDP/AD_Grupo3.git
 				.map(c->transform(c)).collect(Collectors.toList());
 	}
 
 	@Override
-	public List<OfertaModel> findByDateBefore(Date fecha) {
-		return OfertaRepository.findAll().stream()
+	public List<OfertaModel> findByFechamaxBefore(Date fecha) {
+		return OfertaRepository.findByFechamaxBefore(fecha).stream()
 				.map(c->transform(c)).collect(Collectors.toList());
+<<<<<<< HEAD
 	}                                                                                                
+=======
+	}
+	
+>>>>>>> branch 'Entrega2' of https://github.com/YerayDP/AD_Grupo3.git
 }

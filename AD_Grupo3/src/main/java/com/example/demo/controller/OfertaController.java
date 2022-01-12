@@ -53,8 +53,13 @@ public class OfertaController {
 		public ModelAndView listOfertasUser(@PathVariable("id") long id)
 		{
 			ModelAndView mav = new ModelAndView(OFERTAS_VIEW);
+<<<<<<< HEAD
 			User user = userService.findStudentId(id);
 			mav.addObject("ofertas", ofertaService.findByUsuario(user));
+=======
+			UserModel user = userService.findStudentId(id);
+			mav.addObject("ofertas", ofertaService.findByUsuario(user.getId()));
+>>>>>>> branch 'Entrega2' of https://github.com/YerayDP/AD_Grupo3.git
 			return mav; 
 		}
 		
@@ -72,7 +77,7 @@ public class OfertaController {
 			Date localDate = java.sql.Date.valueOf(LocalDate.now());
 			System.out.println(localDate);
 			ModelAndView mav = new ModelAndView("ofertasFilter");
-			mav.addObject("ofertas", ofertaService.findByDateBefore(localDate));
+			mav.addObject("ofertas", ofertaService.findByFechamaxBefore(localDate));
 			return mav; 
 		}
 		
