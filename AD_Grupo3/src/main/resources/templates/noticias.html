@@ -5,6 +5,7 @@
 
 <nav th:replace="Base :: nav"></nav>
 
+
 <header class="masthead">
             <div class="container px-lg-5">
                 <!-- Page Features-->
@@ -17,15 +18,19 @@
 		<tr>
 			<th scope="col">Titulo</th>
 			<th scope="col">Descripcion</th>
-			<th scope="col">Requisitos</th>
+			
 		</tr>
 	</thead>
 	
-	<tbody th:each="noticia ${noticias}">
+	<tbody th:each="noticia: ${noticias}">
 		<tr>
 			<th th:text=${noticia.titulo}></th>
 			<th th:text=${noticia.descripcion}></th>
-		</tr>		
+			<th> 
+				<a th:href="@{/noticias/formNoticia/} + ${noticia.id}" class="btn btn-primary">Editar</a>
+				<a th:href="@{/noticias/delete/} + ${noticia.id}" class="btn btn-primary">Borrar</a>
+			</th>
+		</tr>
 	</tbody>
 
 </table>
@@ -40,7 +45,6 @@
         </header>
 
 
-
-<footer th:replace="Base :: foteer"></footer>
+<footer th:replace="Base :: footer"></footer>
 </body>
 </html>

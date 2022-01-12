@@ -56,18 +56,8 @@ public class NoticiaServiceImpl implements NoticiaService{
 
 	@Override
 	public List<NoticiaModel> listAllNoticias() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public List<NoticiaModel> listAllNoticias(NoticiaModel NoticiaModel) {
 		return noticiaRepository.findAll().stream()
 				.map(c->transform(c)).collect(Collectors.toList());
-
 	}
-	
-
-
-
 	
 }

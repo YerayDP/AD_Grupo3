@@ -24,7 +24,7 @@ import com.example.demo.service.NoticiaService;
 public class NoticiasController {
 
 	private static  String NOTICIAS_VIEW="noticias";
-	private static  String FORM="Form_ciclos";
+	private static  String FORM="Form_noticias";
 
 	@Autowired
 	private NoticiaService noticiaService;
@@ -65,7 +65,7 @@ public class NoticiasController {
 	public String deleteNoticia(@PathVariable("id")int id)
 	{
 		noticiaService.removeNoticia(id);
-		return "redirect:/noticias/listNoticias";
+		return "redirect:/noticias/listNoticia";
 	}
 	
 }
