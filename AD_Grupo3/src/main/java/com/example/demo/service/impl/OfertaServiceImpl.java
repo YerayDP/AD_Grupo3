@@ -31,7 +31,7 @@ public class OfertaServiceImpl implements OfertaService{
 	
 	public Oferta transform(OfertaModel Ofertamodel)
 	{
-		ModelMapper modelMapper = new ModelMapper();
+		ModelMapper modelMapper = new ModelMapper();   
 		return modelMapper.map(Ofertamodel, Oferta.class);
 	}
 	
