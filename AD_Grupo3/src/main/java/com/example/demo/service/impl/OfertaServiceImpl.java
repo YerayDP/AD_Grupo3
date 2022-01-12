@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Oferta;
+import com.example.demo.entity.User;
 import com.example.demo.models.OfertaModel;
 import com.example.demo.models.UserModel;
 import com.example.demo.repository.ofertaRepository;
@@ -61,8 +62,8 @@ public class OfertaServiceImpl implements OfertaService{
 		return transform(OfertaRepository.findById(id).orElse(null));
 	}
 	
-	public List<OfertaModel> findByUsuario(int id) {
-		return OfertaRepository.findByUsuario(id).stream()
+	public List<OfertaModel> findByUsuario(User i) {
+		return OfertaRepository.findByUsuario(i).stream()
 				.map(c->transform(c)).collect(Collectors.toList());
 	}
 
@@ -70,12 +71,5 @@ public class OfertaServiceImpl implements OfertaService{
 	public List<OfertaModel> findByDateBefore(Date fecha) {
 		return OfertaRepository.findAll().stream()
 				.map(c->transform(c)).collect(Collectors.toList());
-	}
-
-	@Override
-	public List<OfertaModel> findByUsuario(UserModel user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+	}                                                                                                
 }

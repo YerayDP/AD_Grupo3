@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.entity.Oferta;
+import com.example.demo.entity.User;
 import com.example.demo.models.OfertaModel;
 import com.example.demo.models.UserModel;
 import com.example.demo.service.OfertaService;
@@ -37,11 +39,21 @@ public class OfertaController {
 		private static  String OFERTAS_VIEW="ofertas";
 		private static  String FORM="Form_ofertas";
 		
+		
+		@GetMapping("/list")
+		public String lista()
+		{
+			String nom= SecurityContextHolder.getContext().getAuthentication().getName();
+			UserModel userM=userService.findStudentMail(nom);
+			long id = userM.getId();
+			return "redirect:/ofertas/listOfertas/"+id;
+			
+		}
 		@GetMapping("/listOfertas/{id}")
 		public ModelAndView listOfertasUser(@PathVariable("id") long id)
 		{
 			ModelAndView mav = new ModelAndView(OFERTAS_VIEW);
-			UserModel user = userService.findStudentId(id);
+			User user = userService.findStudentId(id);
 			mav.addObject("ofertas", ofertaService.findByUsuario(user));
 			return mav; 
 		}
@@ -76,7 +88,7 @@ public class OfertaController {
 				ofertaService.updateOferta(OfertaModel);
 			
 			System.out.println("AAAAAAAA   AAAAAAAAAA"+sessionId);
-			return "redirect:/ofertas/listOfertas/"+11;
+			return "redirect:/ofertas/listOfertas/"+14;
 		}
 		
 		@PreAuthorize("hasRole('ROLE_RRHH')")
