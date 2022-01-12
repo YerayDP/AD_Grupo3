@@ -1,14 +1,17 @@
 package com.example.demo.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Oferta;
 import com.example.demo.models.OfertaModel;
+import com.example.demo.models.UserModel;
 import com.example.demo.repository.ofertaRepository;
 import com.example.demo.service.OfertaService;
 
@@ -16,6 +19,7 @@ import com.example.demo.service.OfertaService;
 public class OfertaServiceImpl implements OfertaService{
 	
 	@Autowired
+	@Qualifier("ofertaRepository")
 	private ofertaRepository OfertaRepository;
 
 	public OfertaModel transform(Oferta Oferta)
@@ -58,8 +62,20 @@ public class OfertaServiceImpl implements OfertaService{
 	}
 	
 	public List<OfertaModel> findByUsuario(int id) {
+		return OfertaRepository.findByUsuario(id).stream()
+				.map(c->transform(c)).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<OfertaModel> findByDateBefore(Date fecha) {
 		return OfertaRepository.findAll().stream()
 				.map(c->transform(c)).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<OfertaModel> findByUsuario(UserModel user) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

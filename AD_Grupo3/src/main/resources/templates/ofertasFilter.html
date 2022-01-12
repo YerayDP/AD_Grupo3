@@ -5,7 +5,6 @@
 
 <nav th:replace="Base :: nav"></nav>
 
-<a th:href="@{/ofertas/formOferta/}" class="btn btn-primary">Crear oferta</a>
 
 <header class="masthead">
             <div class="container px-lg-5">
@@ -27,6 +26,7 @@
 	</thead>
 	
 	<tbody th:each="oferta: ${ofertas}">
+	
 		<tr>
 			<th th:text=${oferta.titular}></th>
 			<th th:text=${oferta.descripcion}></th>
@@ -34,18 +34,16 @@
 			<th th:text=${oferta.numCandidatos}></th>
 			<th th:text=${oferta.fechamax}></th>
 			<th>
-				<a th:href="@{/ofertas/formOferta/} + ${oferta.id}" class="btn btn-primary">Editar</a>
-				<a th:href="@{/ofertas/deleteU/} + ${oferta.id}" class="btn btn-primary">Borrar</a>
+				<a th:href="@{/ofertas/delete/} + ${oferta.id}" class="btn btn-primary">Borrar</a>
 			</th>
 		</tr>
 	</tbody>
 
 </table>
-                
-                    
+                   
                 </div>
             </div>
-                <div class="row gx-lg-5">
+                <div class="row gx-lg-5">                   
                     
                 </div>
             </div>
