@@ -36,7 +36,7 @@
             
         </nav>
 
-<form action="#" th:action="@{/noticias/addNoticia}" th:object="${noticia}" method="post">
+<form action="#" th:action="@{/noticias/addNoticia}" th:object="${noticia}" method="post" enctype="multipart/form-data">
 
 	<div>
 		<input type="hidden" th:field="*{id}" class="form-control" id="id" placeholder="Enter id">
@@ -51,7 +51,12 @@
 		<label for="descripcion">Descripcion</label>
 		<input type="text" th:field="*{descripcion}" class="form-control" id="descripcion" placeholder="Enter descripcion">
 	</div>
-	
+	<div>
+     
+    <label>Imagen </label>
+    <input type="file" name="file" id="file"/>
+     
+    </div>
 	
 	
 	<input type="submit" class="btn btn-primary">

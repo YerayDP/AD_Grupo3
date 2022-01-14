@@ -1,7 +1,11 @@
 package com.example.demo.controller;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoProperties.Storage;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import com.example.demo.entity.Ciclo;
 import com.example.demo.entity.Noticia;
@@ -18,6 +25,7 @@ import com.example.demo.models.CicloModel;
 import com.example.demo.models.NoticiaModel;
 import com.example.demo.service.CicloService;
 import com.example.demo.service.NoticiaService;
+import com.example.upload.*;
 
 @Controller
 @RequestMapping("/noticias")
@@ -29,6 +37,10 @@ public class NoticiasController {
 	@Autowired
 	private NoticiaService noticiaService;
 	
+	@Autowired 
+	@Lazy
+	private StorageService storageService;
+	
 	@GetMapping("/listNoticia")
 	public ModelAndView listCiclos()
 	{
@@ -39,16 +51,30 @@ public class NoticiasController {
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/addNoticia")
-	public String addNoticia(@ModelAttribute("noticia")NoticiaModel NoticiaModel,Model model)
+	public String addNoticia(@ModelAttribute("noticia")NoticiaModel NoticiaModel,Model model,
+	         @RequestParam(value = "file")  MultipartFile file)
 	{
-		if(NoticiaModel.getId()==0)
+		if(NoticiaModel.getId()==0) {
+			String imagen=null;
+			String[] path=null;
+			
+			imagen = storageService.store(file, NoticiaModel.getId());
+			path = MvcUriComponentsBuilder.fromMethodName
+					(FileController.class, "serveFile", imagen).build().toUriString().split("/");
+			
+			NoticiaModel.setImagen(path[path.length-1]);
 			noticiaService.addNoticia(NoticiaModel);
-		else
+		}
+			
+		else {
 			noticiaService.updateNoticia(NoticiaModel);
-		
+		}
+			
+			
 		return "redirect:/noticias/listNoticia";
 	}
 	
+
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping(value={"/formNoticia/", "/formNoticia/{id}"})
 	public String formNoticia(@PathVariable(name="id", required=false)Integer id,Model model)
