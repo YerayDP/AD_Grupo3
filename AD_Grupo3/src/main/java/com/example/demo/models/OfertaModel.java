@@ -2,6 +2,8 @@ package com.example.demo.models;
 
 import java.sql.Date;
 
+import com.example.demo.entity.Ciclo;
+
 public class OfertaModel {
 
     private int id;
@@ -11,13 +13,14 @@ public class OfertaModel {
 	private Date fechamax;
 	private UserModel usuario_id;
 	private int numCandidatos;
+	private Ciclo ciclo_id;
 	
 	public OfertaModel() {
 		super();
 	}
 
 	public OfertaModel(int id, String titular, String descripcion, String requisitos, Date fechamax,
-			UserModel usuario_id, int numCandidatos) {
+			UserModel usuario_id, int numCandidatos, Ciclo ciclo_id) {
 		super();
 		this.id = id;
 		this.titular = titular;
@@ -26,6 +29,7 @@ public class OfertaModel {
 		this.fechamax = fechamax;
 		this.usuario_id = usuario_id;
 		this.numCandidatos = numCandidatos;
+		this.ciclo_id= ciclo_id;
 	}
 
 	public UserModel getUsuario_id() {
@@ -83,5 +87,15 @@ public class OfertaModel {
 	public void setNumCandidatos(int numCandidatos) {
 		this.numCandidatos = numCandidatos;
 	}
+
+	public Ciclo getCiclo_id() {
+		return ciclo_id;
+	}
+
+	public void setCiclo_id(Ciclo ciclo_id) {
+		this.ciclo_id = ciclo_id;
+	}
+	
+	
 	
 }

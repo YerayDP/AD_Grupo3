@@ -5,7 +5,18 @@
 
 <nav th:replace="Base :: nav"></nav>
 
-<a th:href="@{/ofertas/listOfertasCaducadas}" class="btn btn-primary">Ver ofertas caducadas</a>
+<h3>¿Desea filtrar por ciclo?</h3>
+
+<form th:action="@{/redeem_accounts_list_by_redeemer/{id}(id=${employee.idEmployee})}" >
+        <div align="left" >
+            <label for = "employee">¿Desea filtrar por ciclos?: </label>
+            <select id = "employee" name = "employee">
+                <option selected disabled hidden style='display: none' value=''></option>
+                <option th:each = "employee: ${employees}" th:value = "${employee.idEmployee}" th:text = "${employee.employeeName}" th:data = "${employee.idEmployee}"></option>
+            </select>
+            <button type = "submit">Search</button>
+        </div>
+        </form>
 
 <header class="masthead">
             <div class="container px-lg-5">

@@ -5,7 +5,6 @@
 
 <nav th:replace="Base :: nav"></nav>
 
-<a th:href="@{/ofertas/listOfertasCaducadas}" class="btn btn-primary">Ver ofertas caducadas</a>
 
 <header class="masthead">
             <div class="container px-lg-5">
@@ -13,6 +12,12 @@
                 <div class="container px-4 px-lg-5 h-100">
                 <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
                 
+                <div class="form-label-group">
+					<label>Filtrar por ciclo</label>
+					<select>
+							<option th:each="ciclo  : ${ciclos}" th:value="${ciclo.id}" th:text="${ciclo.nombre}"></option>
+					</select>
+				</div>
                 
                 <table class="table table-bordered">
   					<thead class="table-dark">
@@ -34,7 +39,7 @@
 			<th th:text=${oferta.numCandidatos}></th>
 			<th th:text=${oferta.fechamax}></th>
 			<th>
-				<a th:href="@{/ofertas/delete/} + ${oferta.id}" class="btn btn-primary">Borrar</a>
+				<span><a class="btn btn-primary btn-sm" th:href="@{/ofertas/inscribir/{id}(id=${oferta.id})}">Inscribirse</a></span>
 			</th>
 		</tr>
 	</tbody>
