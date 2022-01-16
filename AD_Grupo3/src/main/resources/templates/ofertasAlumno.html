@@ -14,7 +14,7 @@
                 
                 <div class="form-label-group">
 					<label>Filtrar por ciclo</label>
-					<select>
+					<select th:onchange="'window.location.href = \'' + @{/ofertas/listOfertasAlumnos/} + 'ciclo.id\' + this.value ' ">
 							<option th:each="ciclo  : ${ciclos}" th:value="${ciclo.id}" th:text="${ciclo.nombre}"></option>
 					</select>
 				</div>
@@ -22,7 +22,7 @@
                 <table class="table table-bordered">
   					<thead class="table-dark">
 		<tr>
-			<th scope="col">Titulo</th>
+			<th scope="col">Titulo</th> 
 			<th scope="col">Descripcion</th>
 			<th scope="col">Requisitos</th>
 			<th scope="col">Candidatos</th>
