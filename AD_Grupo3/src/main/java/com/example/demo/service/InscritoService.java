@@ -12,6 +12,6 @@ public interface InscritoService {
 	int removeInscrito(int id);
 	Inscrito updateInscrito(InscritoModel InscritoModel);
 	InscritoModel findInscrito(int id);
-	abstract List<InscritoModel> listAllInscritos(InscritoModel InscritoModel);
+	//abstract List<InscritoModel> listAllInscritos(InscritoModel InscritoModel);
 	
 }

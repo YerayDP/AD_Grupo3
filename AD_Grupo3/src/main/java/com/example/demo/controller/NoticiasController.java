@@ -67,6 +67,14 @@ public class NoticiasController {
 		}
 			
 		else {
+			String imagen=null;
+			String[] path=null;
+			
+			imagen = storageService.store(file, NoticiaModel.getId());
+			path = MvcUriComponentsBuilder.fromMethodName
+					
+					(FileController.class, "serveFile", imagen).build().toUriString().split("/");
+			NoticiaModel.setImagen(path[path.length-1]);
 			noticiaService.updateNoticia(NoticiaModel);
 		}
 			

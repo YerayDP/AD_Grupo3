@@ -28,11 +28,15 @@ public class Oferta {
 	@JoinColumn(name="usuarioId")
 	private User usuario;
 	
+	@ManyToOne 
+	@JoinColumn(name="CicloID")
+	private Ciclo ciclo;
+	
 	@OneToMany(mappedBy="oferta", orphanRemoval=true)
 	private List<Inscrito>inscritos = new ArrayList<>();
 	
 	public Oferta(int id, String titular, String descripcion, String requisitos, Date fechamax, int numCandidatos,
-			User usuario) {
+			User usuario, Ciclo ciclo) {
 		super();
 		this.id = id;
 		this.titular = titular;
@@ -41,6 +45,7 @@ public class Oferta {
 		this.fechamax = fechamax;
 		this.numCandidatos = numCandidatos;
 		this.usuario = usuario;
+		this.ciclo = ciclo;
 	}
 
 	public Oferta() {
@@ -102,5 +107,22 @@ public class Oferta {
 	public void setUsuario(User usuario) {
 		this.usuario = usuario;
 	}
+
+	public Ciclo getCiclo() {
+		return ciclo;
+	}
+
+	public void setCiclo(Ciclo ciclo) {
+		this.ciclo = ciclo;
+	}
+
+	public List<Inscrito> getInscritos() {
+		return inscritos;
+	}
+
+	public void setInscritos(List<Inscrito> inscritos) {
+		this.inscritos = inscritos;
+	}
+	
 	
 }
