@@ -11,5 +11,6 @@ public interface CicloService {
 	int removeCiclo(int id);
 	Ciclo updateCiclo(CicloModel CicloModel);
 	CicloModel findCiclo(int id);
+	Ciclo transform(CicloModel ciclo);
 	
 }

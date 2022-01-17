@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.Ciclo;
 import com.example.demo.entity.Oferta;
 import com.example.demo.entity.User;
 import com.example.demo.models.OfertaModel;
@@ -71,6 +72,12 @@ public class OfertaServiceImpl implements OfertaService{
 	@Override
 	public List<OfertaModel> findByFechamaxBefore(Date fecha) {
 		return OfertaRepository.findByFechamaxBefore(fecha).stream()
+				.map(c->transform(c)).collect(Collectors.toList());
+	}
+	
+	@Override
+	public List<OfertaModel> findByCiclo(Ciclo ciclo) {
+		return OfertaRepository.findByCiclo(ciclo).stream()
 				.map(c->transform(c)).collect(Collectors.toList());
 	}
 	

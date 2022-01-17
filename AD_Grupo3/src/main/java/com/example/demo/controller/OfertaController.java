@@ -1,14 +1,15 @@
 package com.example.demo.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +20,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.entity.Ciclo;
+import com.example.demo.entity.Inscrito;
 import com.example.demo.entity.Oferta;
 import com.example.demo.entity.User;
+import com.example.demo.models.CicloModel;
 import com.example.demo.models.InscritoModel;
 import com.example.demo.models.OfertaModel;
 import com.example.demo.models.UserModel;
@@ -50,6 +54,7 @@ public class OfertaController {
 		
 		private static  String OFERTAS_VIEW="ofertas";
 		private static  String FORM="Form_ofertas";
+		private static  String FORMU="Form_ofertasU";
 		
 		@PreAuthorize("hasRole('ROLE_RRHH')")
 		@GetMapping("/listOfertas")
@@ -76,10 +81,46 @@ public class OfertaController {
 		@GetMapping("/listOfertasAlumno")
 		public ModelAndView listOfertasAlumno()
 		{
+			
+			String mail = SecurityContextHolder.getContext().getAuthentication().getName();
+			UserModel user = userService.findStudentMail(mail);
+			
+			List<OfertaModel> ofertas = ofertaService.listAllOfertas();
+			List<Oferta> ofertasS = new ArrayList<Oferta>();
+			for (int i = 0; i < ofertas.size(); i++) {
+				ofertasS.add(ofertaService.transform(ofertas.get(i)));
+			}
+			List<InscritoModel> inscrito = inscritoService.findByUsuario(userService.transform(user));
+			List<Inscrito> inscritoS = new ArrayList<Inscrito>();
+			
+			for (int i = 0; i < inscrito.size(); i++) {
+				inscritoS.add(inscritoService.transform(inscrito.get(i)));
+			}
+			
+			for (int i = 0; i < inscritoS.size(); i++) {
+				for ( int j = 0 ; j < ofertasS.size(); j++) {
+					if(inscritoS.get(i).getOferta().equals(ofertasS.get(j))) {
+						ofertasS.remove(j);
+					}
+				}
+			}
+			
 			ModelAndView mav = new ModelAndView("ofertasAlumno");
 			mav.addObject("ciclos", cicloService.listAllCiclos());
-			mav.addObject("ofertas", ofertaService.listAllOfertas());
+			mav.addObject("ofertas", ofertasS);
 			return mav; 
+		}
+		
+		@PreAuthorize("hasRole('ROLE_ALUMNO')")
+		@GetMapping("/listOfertasAlumnos/ciclo.id{id}")
+		public ModelAndView listOfertasAlumnoFiltro(@PathVariable("id")int id)
+		{
+			ModelAndView mav = new ModelAndView("ofertasAlumno");
+			mav.addObject("ciclos", cicloService.listAllCiclos());
+			CicloModel ciclo = cicloService.findCiclo(id);
+			Ciclo c = cicloService.transform(ciclo);
+			mav.addObject("ofertas", ofertaService.findByCiclo(c));
+			return mav;
 		}
 		
 		@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -99,7 +140,7 @@ public class OfertaController {
 		{	
 			String mail = SecurityContextHolder.getContext().getAuthentication().getName();
 			UserModel user = userService.findStudentMail(mail);
-			OfertaModel.setUsuario_id(user);
+			OfertaModel.setusuario(user);
 			
 			if(OfertaModel.getId()==0)
 				ofertaService.addOferta(OfertaModel);
@@ -113,12 +154,17 @@ public class OfertaController {
 		@GetMapping(value={"/formOferta/", "/formOferta/{id}"})
 		public String formOferta(@PathVariable(name="id", required=false)Integer id,Model model)
 		{
+			String mail = SecurityContextHolder.getContext().getAuthentication().getName();
+			UserModel user = userService.findStudentMail(mail);
+			
 			model.addAttribute("ciclos", cicloService.listAllCiclos());
 			
 			if(id==null)
 				model.addAttribute("oferta",new Oferta());
 			else
+			{
 				model.addAttribute("oferta",ofertaService.findOferta(id));
+			}
 			return FORM;
 		}
 		

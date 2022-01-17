@@ -11,33 +11,33 @@ public class OfertaModel {
 	private String descripcion;
 	private String requisitos;
 	private Date fechamax;
-	private UserModel usuario_id;
+	private UserModel usuario;
 	private int numCandidatos;
-	private Ciclo ciclo_id;
+	private CicloModel ciclo;
 	
 	public OfertaModel() {
 		super();
 	}
 
 	public OfertaModel(int id, String titular, String descripcion, String requisitos, Date fechamax,
-			UserModel usuario_id, int numCandidatos, Ciclo ciclo_id) {
+			UserModel usuario, int numCandidatos, CicloModel ciclo) {
 		super();
 		this.id = id;
 		this.titular = titular;
 		this.descripcion = descripcion;
 		this.requisitos = requisitos;
 		this.fechamax = fechamax;
-		this.usuario_id = usuario_id;
+		this.usuario = usuario;
 		this.numCandidatos = numCandidatos;
-		this.ciclo_id= ciclo_id;
+		this.ciclo= ciclo;
 	}
 
-	public UserModel getUsuario_id() {
-		return usuario_id;
+	public UserModel getusuario() {
+		return usuario;
 	}
 
-	public void setUsuario_id(UserModel usuario_id) {
-		this.usuario_id = usuario_id;
+	public void setusuario(UserModel usuario) {
+		this.usuario = usuario;
 	}
 
 	public int getId() {
@@ -88,12 +88,12 @@ public class OfertaModel {
 		this.numCandidatos = numCandidatos;
 	}
 
-	public Ciclo getCiclo_id() {
-		return ciclo_id;
+	public CicloModel getciclo() {
+		return ciclo;
 	}
 
-	public void setCiclo_id(Ciclo ciclo_id) {
-		this.ciclo_id = ciclo_id;
+	public void setciclo(CicloModel ciclo) {
+		this.ciclo = ciclo;
 	}
 	
 	

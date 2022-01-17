@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,8 +7,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.Ciclo;
 import com.example.demo.entity.Inscrito;
+import com.example.demo.entity.User;
 import com.example.demo.models.InscritoModel;
+import com.example.demo.models.OfertaModel;
 import com.example.demo.repository.inscritoRepository;
 import com.example.demo.service.InscritoService;
 
@@ -58,9 +60,11 @@ public class InscritoServiceImpl implements InscritoService{
 	public InscritoModel findInscrito(int id) {
 		return transform(InscritoRepository.findById(id).orElse(null));
 	}
-
 	
-
-
+	@Override
+	public List<InscritoModel> findByUsuario(User user) {
+		return InscritoRepository.findByUsuario(user).stream()
+				.map(c->transform(c)).collect(Collectors.toList());
+	}
 	
 }
