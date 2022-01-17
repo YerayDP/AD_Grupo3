@@ -54,6 +54,7 @@ public class OfertaController {
 		
 		private static  String OFERTAS_VIEW="ofertas";
 		private static  String FORM="Form_ofertas";
+		private static  String FORMU="Form_ofertasU";
 		
 		@PreAuthorize("hasRole('ROLE_RRHH')")
 		@GetMapping("/listOfertas")
@@ -139,7 +140,7 @@ public class OfertaController {
 		{	
 			String mail = SecurityContextHolder.getContext().getAuthentication().getName();
 			UserModel user = userService.findStudentMail(mail);
-			OfertaModel.setUsuario_id(user);
+			OfertaModel.setusuario(user);
 			
 			if(OfertaModel.getId()==0)
 				ofertaService.addOferta(OfertaModel);
@@ -161,7 +162,9 @@ public class OfertaController {
 			if(id==null)
 				model.addAttribute("oferta",new Oferta());
 			else
+			{
 				model.addAttribute("oferta",ofertaService.findOferta(id));
+			}
 			return FORM;
 		}
 		
