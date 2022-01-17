@@ -87,29 +87,22 @@
                             </div>
                         </div>
                     </div>
-                    <div th:if="${#authorization.expression('hasRole(''ROLE_RRHH'')') }">
+                    <div th:if="${#authorization.expression('hasRole(''ROLE_ALUMNO'')') }">
                     <div class="row row-cols-1 row-cols-md-3 g-4 accordion-body">
-								<div th:each="oferta : ${ofertas}" class="col">
+								<div th:each="noticia : ${noticias}" class="col">
 									<div class="card h-100">
 										<div class="card-body">
-											<h5 class="card-title" th:text="${oferta.titular}"></h5>
-											<p th:text="${oferta.descripcion}" class="card-text"></p>
+											<h5 class="card-title" th:text="${noticia.titulo}"></h5>
+											<p th:text="${noticia.descripcion}" class="card-text"></p>
 										</div>
 										<div class="card-footer">
-											<p th:text="${oferta.requisitos}"></p>
-											<p th:text="'Numero de candidatos: '+${oferta.numCandidatos}"></p>
-											<p th:text="'Ciclo: ' +${oferta.cicloid.id}"></p>
-
-											<form
-												th:action="@{'/user/oferta/'+${oferta.id}+'/'+${session.usuario.id}}"
-												method="POST">
-												<button type="submit" class="btn btn-primary">Inscribirse</button>
-											</form>
+											<p th:text="'Ciclo: ' +${noticia.cicloid.id}"></p>
 										</div>
 									</div>
 								</div>
 							</div>
                     		</div>
+                    
                     
                 </div>
             </div>
