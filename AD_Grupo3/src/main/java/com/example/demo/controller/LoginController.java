@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.User;
 import com.example.demo.service.CicloService;
+import com.example.demo.service.NoticiaService;
 import com.example.demo.service.impl.UserService;
 
 @Controller
@@ -26,6 +28,10 @@ public class LoginController {
 	@Qualifier("cicloService")
 	private CicloService cicloService;
 	
+	@Autowired
+	@Qualifier("NoticiaService")
+	private NoticiaService noticiaService;
+	
 	@GetMapping("/auth/login")
 	public ModelAndView login(Model model, @RequestParam(name="error", required=false) String error,
 			@RequestParam(name="logout", required=false) String logout, RedirectAttributes flash)
@@ -36,6 +42,7 @@ public class LoginController {
 			//model.addAttribute("user",new User());
 			//flash.addFlashAttribute("success", "Sesión cerrada correctamente");
 			mav.addObject("msg", "Sesion cerrada correctamente.");
+		
 		}
 		mav.setViewName("login");
 		return mav;
@@ -55,6 +62,12 @@ public class LoginController {
 		userService.registrar(user);
 		flash.addFlashAttribute("sucess","User registered");
 		return "redirect:/auth/login";
+	}
+	@GetMapping("/")
+	public ModelAndView showRRHH() {
+		ModelAndView mav = new ModelAndView("index");
+		mav.addObject("noticias", noticiaService.listAllNoticias());
+	    return mav;
 	}
 	
 }
