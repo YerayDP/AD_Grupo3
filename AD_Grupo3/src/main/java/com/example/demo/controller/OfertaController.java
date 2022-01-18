@@ -81,33 +81,9 @@ public class OfertaController {
 		@GetMapping("/listOfertasAlumno")
 		public ModelAndView listOfertasAlumno()
 		{
-			
-			String mail = SecurityContextHolder.getContext().getAuthentication().getName();
-			UserModel user = userService.findStudentMail(mail);
-			
-			List<OfertaModel> ofertas = ofertaService.listAllOfertas();
-			List<Oferta> ofertasS = new ArrayList<Oferta>();
-			for (int i = 0; i < ofertas.size(); i++) {
-				ofertasS.add(ofertaService.transform(ofertas.get(i)));
-			}
-			List<InscritoModel> inscrito = inscritoService.findByUsuario(userService.transform(user));
-			List<Inscrito> inscritoS = new ArrayList<Inscrito>();
-			
-			for (int i = 0; i < inscrito.size(); i++) {
-				inscritoS.add(inscritoService.transform(inscrito.get(i)));
-			}
-			
-			for (int i = 0; i < inscritoS.size(); i++) {
-				for ( int j = 0 ; j < ofertasS.size(); j++) {
-					if(inscritoS.get(i).getOferta().equals(ofertasS.get(j))) {
-						ofertasS.remove(j);
-					}
-				}
-			}
-			
 			ModelAndView mav = new ModelAndView("ofertasAlumno");
 			mav.addObject("ciclos", cicloService.listAllCiclos());
-			mav.addObject("ofertas", ofertasS);
+			mav.addObject("ofertas", ofertaService.listAllOfertas());
 			return mav; 
 		}
 		
