@@ -34,7 +34,7 @@
 			<th th:text=${oferta.numCandidatos}></th>
 			<th th:text=${oferta.fechamax}></th>
 			<th>
-				<a th:href="@{/ofertas/delete/} + ${oferta.id}" class="btn btn-primary">Borrar</a>
+				<a th:href="@{/ofertas/delete/} + ${oferta.id}" onclick="return confirm('¿Desea borrar esta oferta?')" class="btn btn-primary">Borrar</a>
 			</th>
 		</tr>
 	</tbody>

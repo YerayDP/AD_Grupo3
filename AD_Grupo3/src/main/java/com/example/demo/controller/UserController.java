@@ -39,16 +39,12 @@ public class UserController {
 	@Autowired
 	@Qualifier("cicloService")
 	private CicloService cicloService;
-	
-	/*@Autowired
-	@Qualifier("noticiaService")
-	private NoticiaService noticiaService;*/
+
 	
 	@GetMapping("/")
 	public ModelAndView Volver(Authentication auth,HttpSession session)
 	{	    
 		ModelAndView mav = new ModelAndView();
-		//mav.addObject("noticias", noticiaService.listAllNoticias());
 	            String username = auth.getName();
 
 	            if(session.getAttribute("usuario")==null) {
