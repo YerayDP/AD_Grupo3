@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoProperties.Storage;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +22,14 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 
 import com.example.demo.entity.Ciclo;
 import com.example.demo.entity.Noticia;
+import com.example.demo.entity.User;
 import com.example.demo.models.CicloModel;
 import com.example.demo.models.NoticiaModel;
+import com.example.demo.models.UserModel;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.service.CicloService;
 import com.example.demo.service.NoticiaService;
+import com.example.demo.service.impl.UserService;
 import com.example.upload.*;
 
 @Controller
@@ -37,16 +42,24 @@ public class NoticiasController {
 	@Autowired
 	private NoticiaService noticiaService;
 	
+	@Autowired
+	private CicloService CicloService;
+	@Autowired
+	private UserService UserService;
+	
 	@Autowired 
 	@Lazy
 	private StorageService storageService;
 	
 	@GetMapping("/listNoticia")
-	public ModelAndView listCiclos()
+	public String listCiclos(Model model)
 	{
-		ModelAndView mav = new ModelAndView(NOTICIAS_VIEW);
-		mav.addObject("noticias", noticiaService.listAllNoticias());
-		return mav;
+		
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		UserModel user = UserService.findStudentMail(username);
+		User u = UserService.transform(user);
+		model.addAttribute("noticias", CicloService.listByCiclo(CicloService.transform(u.getCiclo())));
+		return NOTICIAS_VIEW;
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")

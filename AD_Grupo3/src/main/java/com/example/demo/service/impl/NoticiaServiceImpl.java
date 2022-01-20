@@ -51,7 +51,7 @@ public class NoticiaServiceImpl implements NoticiaService{
 	}
 	
 	public NoticiaModel findNoticia(int id) {
-		return transform(noticiaRepository.findById(id).orElse(null));
+		return transform(noticiaRepository.findById(id));
 	}
 
 	@Override
@@ -59,5 +59,7 @@ public class NoticiaServiceImpl implements NoticiaService{
 		return noticiaRepository.findAll().stream()
 				.map(c->transform(c)).collect(Collectors.toList());
 	}
+
+	
 	
 }
