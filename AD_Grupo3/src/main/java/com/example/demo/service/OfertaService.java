@@ -4,8 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import com.example.demo.entity.Ciclo;
+import com.example.demo.entity.Inscrito;
 import com.example.demo.entity.Oferta;
 import com.example.demo.entity.User;
+import com.example.demo.models.InscritoModel;
 import com.example.demo.models.OfertaModel;
 
 public interface OfertaService {
@@ -19,6 +21,7 @@ public interface OfertaService {
 	List<OfertaModel> findByCiclo(Ciclo ciclo);
 	List<OfertaModel> findByFechamaxBefore(Date fecha);
 	Oferta transform(OfertaModel Ofertamodel);
-	//abstract List<OfertaModel> listAllOfertas(OfertaModel OfertaModel);
+	List<OfertaModel> findById(int id);
+	List<OfertaModel> consulta(int id);
 	
 }

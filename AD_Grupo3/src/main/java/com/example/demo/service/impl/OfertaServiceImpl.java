@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Ciclo;
+import com.example.demo.entity.Inscrito;
 import com.example.demo.entity.Oferta;
 import com.example.demo.entity.User;
 import com.example.demo.models.OfertaModel;
@@ -80,5 +81,19 @@ public class OfertaServiceImpl implements OfertaService{
 		return OfertaRepository.findByCiclo(ciclo).stream()
 				.map(c->transform(c)).collect(Collectors.toList());
 	}
+
+	@Override
+	public List<OfertaModel> findById(int id) {
+		return OfertaRepository.findById(id).stream()
+				.map(c->transform(c)).collect(Collectors.toList());
+	}
+
+
+	@Override
+	public List<OfertaModel> consulta(int id) {
+		return OfertaRepository.consulta(id).stream()
+				.map(c->transform(c)).collect(Collectors.toList());
+	}
+
 	
 }
