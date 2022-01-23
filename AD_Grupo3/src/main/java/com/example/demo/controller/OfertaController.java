@@ -194,7 +194,7 @@ public class OfertaController {
 			String mail = SecurityContextHolder.getContext().getAuthentication().getName();
 			UserModel user = userService.findStudentMail(mail);
 					
-			mav.addObject("ofertas", ofertaService.consulta(3));
+			mav.addObject("ofertas", ofertaService.consulta(id));
 			
 			return mav;
 		}
