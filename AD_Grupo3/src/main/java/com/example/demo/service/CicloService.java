@@ -16,7 +16,8 @@ public interface CicloService {
 	CicloModel findCiclo(int id);
 	Ciclo transform(CicloModel ciclo);
 	Ciclo findbyUserCicloId(User User);
-	List<NoticiaModel> listByCiclo(CicloModel ciclo);
+	List<NoticiaModel> listByCiclo(Ciclo ciclo);
 	Ciclo findCicloById(int id);
+	
 
 }

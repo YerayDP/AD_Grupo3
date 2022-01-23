@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.entity.Ciclo;
 import com.example.demo.entity.User;
+import com.example.demo.models.NoticiaModel;
 import com.example.demo.models.UserModel;
 import com.example.demo.service.CicloService;
 import com.example.demo.service.NoticiaService;
@@ -23,6 +27,7 @@ import com.example.demo.service.impl.UserService;
 public class LoginController {
 
 	private static  String INDEX="index";
+	private static  String LOGIN="login";
 	
 	@Autowired
 	@Qualifier("userService")
@@ -36,6 +41,8 @@ public class LoginController {
 	@Qualifier("NoticiaService")
 	private NoticiaService noticiaService;
 	
+	
+	private int But=0;	
 	@GetMapping("/auth/login")
 	public ModelAndView login(Model model, @RequestParam(name="error", required=false) String error,
 			@RequestParam(name="logout", required=false) String logout, RedirectAttributes flash)
@@ -69,18 +76,43 @@ public class LoginController {
 	}
 	@GetMapping("/")
 	public String showRRHH(Model model) {
-		
-
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		System.out.println(username);
-		UserModel user = userService.findStudentMail(username);
-		System.out.println(user.getCiclo_id());
-		User user2 = userService.transform(user);
-		System.out.println(user2.getCiclo());
-		
-		model.addAttribute("noticia", cicloService.listByCiclo(cicloService.transform(user2.getCiclo())));
-		
+		But=0;
+		if( !SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser") && But==0) {
+			model.addAttribute("noticias",showList());
+			model.addAttribute("boton",But);
+		}
+		else
+			return "redirect:/auth/login";
 	    return INDEX;
+		
+	}
+	@GetMapping("/1")
+	public String showRRHH1(Model model) {
+		But=1;
+		if( !SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser") && But==1) {
+			model.addAttribute("noticias",showListAll());
+			model.addAttribute("boton",But);
+		}
+		else
+			return "redirect:/auth/login";
+	    return INDEX;
+		
+	}
+	public List<NoticiaModel> showList() {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		UserModel user = userService.findStudentMail(username);
+		int user2 = user.getCiclo().getId();
+		
+		Ciclo ciclo =cicloService.findCicloById(user2);
+		System.out.println(ciclo.getNombre());
+		System.out.println(cicloService.listByCiclo(ciclo));
+		List<NoticiaModel>Noticias=cicloService.listByCiclo(ciclo);
+		return Noticias;
+	}
+	public List<NoticiaModel> showListAll() {
+		
+		List<NoticiaModel>Noticias=noticiaService.listAllNoticias();
+		return Noticias;
 	}
 	
 }

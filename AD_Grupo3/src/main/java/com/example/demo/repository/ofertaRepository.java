@@ -24,5 +24,7 @@ public interface ofertaRepository extends JpaRepository <Oferta, Serializable>{
 	
 	@Query(value="SELECT * FROM oferta o, inscrito i WHERE i.id_usuario= ?1", nativeQuery = true)
 	List<Oferta> consulta(int id);
+	@Query(value="SELECT * FROM oferta o, inscrito i WHERE o.id !=i.id_oferta AND i.id_usuario= ?1", nativeQuery = true)
+	List<Oferta> posibles(int id);
 	
 }

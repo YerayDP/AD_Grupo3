@@ -81,9 +81,12 @@ public class OfertaController {
 		@GetMapping("/listOfertasAlumno")
 		public ModelAndView listOfertasAlumno()
 		{
+			String mail = SecurityContextHolder.getContext().getAuthentication().getName();
+			UserModel user = userService.findStudentMail(mail);
 			ModelAndView mav = new ModelAndView("ofertasAlumno");
+			
 			mav.addObject("ciclos", cicloService.listAllCiclos());
-			mav.addObject("ofertas", ofertaService.listAllOfertas());
+			mav.addObject("ofertas", ofertaService.posibles(user.getId()));
 			return mav; 
 		}
 		

@@ -68,9 +68,9 @@ public class CicloServiceImpl implements CicloService{
 
 	
 	@Override
-	public List<NoticiaModel> listByCiclo(CicloModel ciclo) {
+	public List<NoticiaModel> listByCiclo(Ciclo ciclo) {
 		ModelMapper modelMapper = new ModelMapper();
-		return noticiaRepository.findByCiclo(transform(ciclo)).stream()
+		return noticiaRepository.findByCiclo(ciclo).stream()
 				.map(n -> modelMapper.map(n, NoticiaModel.class))
 				.collect(Collectors.toList());
 	}

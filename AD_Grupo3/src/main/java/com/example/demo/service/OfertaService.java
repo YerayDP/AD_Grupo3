@@ -23,5 +23,6 @@ public interface OfertaService {
 	Oferta transform(OfertaModel Ofertamodel);
 	List<OfertaModel> findById(int id);
 	List<OfertaModel> consulta(int id);
+	List<OfertaModel> posibles(int id);
 	
 }

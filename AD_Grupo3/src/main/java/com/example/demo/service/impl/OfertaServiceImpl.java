@@ -95,5 +95,11 @@ public class OfertaServiceImpl implements OfertaService{
 				.map(c->transform(c)).collect(Collectors.toList());
 	}
 
+	@Override
+	public List<OfertaModel> posibles(int id) {
+		return OfertaRepository.posibles(id).stream()
+				.map(c->transform(c)).collect(Collectors.toList());
+	}
+
 	
 }

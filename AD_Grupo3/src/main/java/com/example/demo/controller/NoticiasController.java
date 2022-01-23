@@ -58,7 +58,7 @@ public class NoticiasController {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		UserModel user = UserService.findStudentMail(username);
 		User u = UserService.transform(user);
-		model.addAttribute("noticias", CicloService.listByCiclo(CicloService.transform(u.getCiclo())));
+		model.addAttribute("noticias", CicloService.listByCiclo(u.getCiclo()));
 		return NOTICIAS_VIEW;
 	}
 	
