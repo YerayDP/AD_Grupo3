@@ -35,6 +35,9 @@
 			<th th:text=${oferta.fechamax}></th>
 			<th>
 				<a th:href="@{/ofertas/delete/} + ${oferta.id}" onclick="return confirm('¿Desea borrar esta oferta?')" class="btn btn-primary">Borrar</a>
+				<div th:if="${#authorization.expression('hasRole(''ROLE_RRHH'')') }">
+					<a th:href="@{/ofertas/listAlumnos/} + ${oferta.id}" class="btn btn-primary">Alumnos</a>
+				</div>
 			</th>
 		</tr>
 	</tbody>

@@ -79,13 +79,22 @@
                     <div th:if="${#authorization.expression('hasRole(''ROLE_RRHH'')') }">
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center">
-                            	Desea ver todas las ofertas disponibles en el centro en este momento?
+                            	Desea ver las ofertas disponibles en el centro en este momento?
                             </div>
                             <a class="btn btn-primary btn-xl" text-align="center" th:href="@{/ofertas/listOfertas}">Ver ofertas</a>
                             </div>
                         </div>
                     </div>
-                    
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                    <div th:if="${#authorization.expression('hasRole(''ROLE_RRHH'')') }">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center">
+                            	Desea ver todas las ofertas disponibles en el centro en este momento?
+                            </div>
+                            <a class="btn btn-primary btn-xl" text-align="center" th:href="@{/ofertas/listOfertasGeneral}">Ver todas las ofertas</a>
+                            </div>
+                        </div>
+                    </div>
                     	
                        <div th:if="${#authorization.expression('hasRole(''ROLE_ALUMNO'')') }">
                        <div class="card bg-light">

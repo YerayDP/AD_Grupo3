@@ -119,6 +119,11 @@ public class UserService implements UserDetailsService{
 		
 	}
 	
+	public List<UserModel> alumnos(int id) {
+		return userRepository.alumnos(id).stream()
+				.map(c->transform(c)).collect(Collectors.toList());
+	}
+	
 	
 	
 }

@@ -21,7 +21,7 @@ public interface UserRepository extends JpaRepository <User, Serializable>{
 	public abstract User findByCiclo_id(long id);
 
 	@Query(value="SELECT * FROM User u, Oferta o, Inscrito i WHERE i.id_usuario = u.id AND o.id = i.id_oferta AND o.id = ?1", nativeQuery = true)
-	List<User> alumnos(Oferta Oferta);
+	List<User> alumnos(int id);
 
 	
 	

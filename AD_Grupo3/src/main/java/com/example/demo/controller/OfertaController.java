@@ -76,6 +76,23 @@ public class OfertaController {
 			mav.addObject("ofertas", ofertaService.listAllOfertas());
 			return mav; 
 		}
+		@PreAuthorize("hasRole('ROLE_RRHH')")
+		@GetMapping("/listOfertasGeneral")
+		public ModelAndView listOfertasRRHH()
+		{
+			ModelAndView mav = new ModelAndView("ofertasAdmin");
+			mav.addObject("ofertas", ofertaService.listAllOfertas());
+			return mav; 
+		}
+		
+		@PreAuthorize("hasRole('ROLE_RRHH')")
+		@GetMapping("/listAlumnos/{id}")
+		public ModelAndView listAl(@PathVariable("id")int id)
+		{
+			ModelAndView mav = new ModelAndView("listAlumnos");
+			mav.addObject("users", userService.alumnos(id));
+			return mav; 
+		}
 		
 		@PreAuthorize("hasRole('ROLE_ALUMNO')")
 		@GetMapping("/listOfertasAlumno")
