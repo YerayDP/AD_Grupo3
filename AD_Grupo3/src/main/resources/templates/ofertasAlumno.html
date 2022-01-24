@@ -30,6 +30,7 @@
                 <div class="form-label-group">
 					<label>Filtrar por ciclo</label>
 					<select th:onchange="'window.location.href = \'' + @{/ofertas/listOfertasAlumnos/} + 'ciclo.id\' + this.value ' ">
+							<option th:value="0">Buscar por ciclo</option>
 							<option th:each="ciclo  : ${ciclos}" th:value="${ciclo.id}" th:text="${ciclo.nombre}"></option>
 					</select>
 				</div>
