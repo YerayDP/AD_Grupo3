@@ -186,15 +186,15 @@ public class OfertaController {
 		}
 		
 		@PreAuthorize("hasRole('ROLE_ALUMNO')")
-		@GetMapping("/inscrito/{id}")
-		public ModelAndView inscrito(@PathVariable("id")int id, Model model)
+		@GetMapping("/inscrito")
+		public ModelAndView inscrito(Model model)
 		{
 			ModelAndView mav = new ModelAndView("ofertasInscrito");
 			
 			String mail = SecurityContextHolder.getContext().getAuthentication().getName();
 			UserModel user = userService.findStudentMail(mail);
 					
-			mav.addObject("ofertas", ofertaService.consulta(id));
+			mav.addObject("ofertas", ofertaService.consulta(user.getId()));
 			
 			return mav;
 		}
