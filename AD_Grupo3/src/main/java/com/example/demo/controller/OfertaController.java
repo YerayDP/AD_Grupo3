@@ -115,7 +115,7 @@ public class OfertaController {
 			mav.addObject("ciclos", cicloService.listAllCiclos());
 			CicloModel ciclo = cicloService.findCiclo(id);
 			Ciclo c = cicloService.transform(ciclo);
-			mav.addObject("ofertas", ofertaService.findByCiclo(c));
+			mav.addObject("ofertas", ofertaService.posibles(c.getId()));
 			return mav;
 		}
 		
@@ -199,7 +199,7 @@ public class OfertaController {
 			
 			inscritoService.addInscrito(inscrito);
 			
-			return "redirect:ofertas/listOfertasAlumno";
+			return "redirect:/ofertas/listOfertasAlumno";
 		}
 		
 		@PreAuthorize("hasRole('ROLE_ALUMNO')")
