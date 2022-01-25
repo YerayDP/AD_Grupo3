@@ -21,6 +21,7 @@
         <nav th:fragment="nav" class="navbar navbar-light bg-light static-top"> 
             <div class="container">
                 <div sec:authorize ="isAuthenticated()" class="nav-item">
+                	<a th:href="@{/}" class="btn btn-primary">Inicio</a>
 		        	<form class="form-inline" th:action="@{/logout}" method="post">
 						<button class="btn btn-link" type="submit">Logout</button>
 					</form>
@@ -38,7 +39,7 @@
             <div th:if="${#authorization.expression('hasRole(''ROLE_RRHH'')') }">
             <a class="btn btn-primary" th:href="@{/user/index}">Perfil</a></div>           
             </div>
-            
+                       
         </nav>
         
         <!-- Masthead-->
