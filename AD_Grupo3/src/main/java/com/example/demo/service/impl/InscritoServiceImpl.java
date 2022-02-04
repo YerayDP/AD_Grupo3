@@ -66,5 +66,17 @@ public class InscritoServiceImpl implements InscritoService{
 		return InscritoRepository.findByUsuario(user).stream()
 				.map(c->transform(c)).collect(Collectors.toList());
 	}
+
+	@Override
+	public List<InscritoModel> findByCiclo(Ciclo ciclo) {
+		return InscritoRepository.findByCiclo(ciclo).stream()
+				.map(c->transform(c)).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<InscritoModel> inscritos(Ciclo ciclo) {
+		return InscritoRepository.inscritos(ciclo).stream()
+				.map(c->transform(c)).collect(Collectors.toList());
+	}
 	
 }
