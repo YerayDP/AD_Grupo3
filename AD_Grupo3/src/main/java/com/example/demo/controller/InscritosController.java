@@ -106,7 +106,7 @@ public class InscritosController {
 	@GetMapping("/listInscritosCiclo")
 	public ModelAndView listInscipcionesFechaN()
 	{
-		ModelAndView mav = new ModelAndView("listInsFecha");
+		ModelAndView mav = new ModelAndView("listInsFecha"); 
 		String id= SecurityContextHolder.getContext().getAuthentication().getName();
 		UserModel userM=userService.findStudentMail(id);
 		mav.addObject("inscritos", inscritoService.listInscritosN(userM.getEmpresa()));
