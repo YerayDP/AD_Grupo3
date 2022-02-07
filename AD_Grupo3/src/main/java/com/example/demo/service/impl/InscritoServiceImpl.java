@@ -75,9 +75,9 @@ public class InscritoServiceImpl implements InscritoService{
 	}
 
 	@Override
-	public List<InscritoModel> inscritos(Ciclo ciclo) {
+	public List<Inscrito> inscritos(Ciclo ciclo) {
 		return InscritoRepository.inscritos(ciclo).stream()
-				.map(c->transform(c)).collect(Collectors.toList());
+				.collect(Collectors.toList());
 	}
 
 	@Override

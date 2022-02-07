@@ -87,7 +87,8 @@ public class InscritosController {
 	@GetMapping("/listInscritosCiclo/ciclo.id{id}")
 	public ModelAndView listInscipcionesCiclo(@PathVariable("id")int id)
 	{
-		ModelAndView mav = new ModelAndView("inscritos");
+		ModelAndView mav = new ModelAndView("listInsCiclo");
+		mav.addObject("ciclos", cicloService.listAllCiclos());
 		Ciclo ciclo = cicloService.findCicloById(id);
 		mav.addObject("inscritos", inscritoService.inscritos(ciclo));
 		return mav; 
@@ -97,7 +98,7 @@ public class InscritosController {
 	public ModelAndView listInscipcionesCicloN()
 	{
 		ModelAndView mav = new ModelAndView("listInsCiclo");
-		
+		mav.addObject("ciclos", cicloService.listAllCiclos());
 		mav.addObject("inscritos", inscritoService.listInscritos());
 	
 		return mav; 

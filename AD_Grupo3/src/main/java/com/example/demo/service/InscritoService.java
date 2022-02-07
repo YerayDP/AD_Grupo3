@@ -17,7 +17,7 @@ public interface InscritoService {
 	InscritoModel findInscrito(int id);
 	List <InscritoModel> findByUsuario(User user);
 	List <InscritoModel> findByCiclo(Ciclo ciclo);
-	List <InscritoModel> inscritos(Ciclo ciclo);
+	List<Inscrito> inscritos(Ciclo ciclo);
 	List <InscritoModel> empresaFecha(String id, Date d1, Date d2);
 	Inscrito transform(InscritoModel Inscritomodel);
 	List<Inscrito> listInscritos();

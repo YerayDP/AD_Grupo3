@@ -40,8 +40,8 @@
 	<tbody th:each="inscrito: ${inscritos}">
 		<tr>
 			<th th:text=${inscrito.id}></th>
-			<th th:text=${inscrito.oferta.id}></th>
-			<th th:text=${inscrito.usuario.id}></th>
+			<th th:text=${inscrito.id_oferta}></th>
+			<th th:text=${inscrito.id_usuario}></th>
 			<th th:text=${inscrito.fecha_inscripcion}></th>
 		</tr>
 	</tbody>
