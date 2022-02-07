@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.example.demo.entity.Ciclo;
@@ -17,7 +18,9 @@ public interface InscritoService {
 	List <InscritoModel> findByUsuario(User user);
 	List <InscritoModel> findByCiclo(Ciclo ciclo);
 	List <InscritoModel> inscritos(Ciclo ciclo);
+	List <InscritoModel> empresaFecha(String id, Date d1, Date d2);
 	Inscrito transform(InscritoModel Inscritomodel);
+	List<Inscrito> listInscritos();
 	
 	
 }

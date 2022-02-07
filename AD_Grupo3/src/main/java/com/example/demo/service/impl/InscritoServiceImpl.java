@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -78,5 +79,17 @@ public class InscritoServiceImpl implements InscritoService{
 		return InscritoRepository.inscritos(ciclo).stream()
 				.map(c->transform(c)).collect(Collectors.toList());
 	}
-	
+
+	@Override
+	public List<InscritoModel> empresaFecha(String id, Date d1, Date d2) {
+		return InscritoRepository.empresaFechas(id,d1,d2).stream()
+				.map(c->transform(c)).collect(Collectors.toList());
+	}
+	@Override
+	public List<Inscrito> listInscritos() {
+		return InscritoRepository.findAll().stream()
+				.collect(Collectors.toList());
+
+	}
+
 }
