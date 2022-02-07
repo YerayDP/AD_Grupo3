@@ -24,12 +24,6 @@ public class PdfService {
 
 	public void createPdf(CicloModel ciclo, List<OfertaModel> ofertas) throws IOException {
 
-		try {
-			Runtime.getRuntime()
-					.exec("rundll32 url.dll,FileProtocolHandler " + new File("ofertas.pdf").getAbsolutePath());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 		Context context = new Context();
 		context.setVariable("nombre", ciclo.getNombre());
@@ -44,6 +38,13 @@ public class PdfService {
 		renderer.createPDF(outputStream, false);
 		renderer.finishPDF();
 		outputStream.close();
+		
+		try {
+			Runtime.getRuntime()
+					.exec("rundll32 url.dll,FileProtocolHandler " + new File("ofertas.pdf").getAbsolutePath());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
