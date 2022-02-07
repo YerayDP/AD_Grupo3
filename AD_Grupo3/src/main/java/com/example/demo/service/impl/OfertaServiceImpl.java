@@ -101,5 +101,11 @@ public class OfertaServiceImpl implements OfertaService{
 				.map(c->transform(c)).collect(Collectors.toList());
 	}
 
+	@Override
+	public List<OfertaModel> pdf(Ciclo ciclo, Date fecha) {
+		return OfertaRepository.pdf(ciclo.getId(),fecha).stream()
+				.map(c->transform(c)).collect(Collectors.toList());
+	}
+
 	
 }

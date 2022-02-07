@@ -24,5 +24,6 @@ public interface OfertaService {
 	List<OfertaModel> findById(int id);
 	List<OfertaModel> consulta(int id);
 	List<OfertaModel> posibles(int id);
+	List<OfertaModel> pdf(Ciclo Ciclo, Date fecha);
 	
 }
