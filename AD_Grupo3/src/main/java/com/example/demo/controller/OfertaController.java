@@ -223,10 +223,11 @@ public class OfertaController {
 		
 		@PreAuthorize("hasRole('ROLE_ADMIN')")
 		@GetMapping("/pdf/{id}")
-		public void pdf(Model model, @PathVariable("id")int id) throws IOException
+		public String pdf(Model model, @PathVariable("id")int id) throws IOException
 		{	
 			Date localDate = java.sql.Date.valueOf(LocalDate.now());
 			pdfService.createPdf(cicloService.transform(cicloService.findCicloById(id)), ofertaService.pdf(cicloService.findCicloById(id),localDate));
+			return "redirect:/ciclos/listCiclos";
 		}
 	
 }
