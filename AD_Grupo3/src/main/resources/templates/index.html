@@ -75,6 +75,16 @@
                             </div>
                         </div>
                     </div>    
+                     <div class="col-lg-6 col-xxl-4 mb-5">
+                    <div th:if="${#authorization.expression('hasRole(''ROLE_RRHH'')') }">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center">
+                            	Ver inscripciones de cada ciclo
+                            </div>
+                            <a class="btn btn-primary btn-xl" text-align="center" th:href="@{/inscritos/listInscritosCiclo}">Ver</a>
+                            </div>
+                        </div>
+                    </div>    
                     <div class="col-lg-6 col-xxl-4 mb-5">
                     <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')') }">
                         <div class="card bg-light border-0 h-100">

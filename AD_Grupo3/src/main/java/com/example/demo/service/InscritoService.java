@@ -21,6 +21,8 @@ public interface InscritoService {
 	List <InscritoModel> empresaFecha(String id, Date d1, Date d2);
 	Inscrito transform(InscritoModel Inscritomodel);
 	List<Inscrito> listInscritos();
+
+	List<Inscrito> listInscritosN(String id);
 	
 	
 }

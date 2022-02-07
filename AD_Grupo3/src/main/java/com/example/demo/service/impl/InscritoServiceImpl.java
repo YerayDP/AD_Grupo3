@@ -92,4 +92,10 @@ public class InscritoServiceImpl implements InscritoService{
 
 	}
 
+	@Override
+	public List<Inscrito> listInscritosN(String id) {
+		return InscritoRepository.empresaFechasN(id).stream()
+				.collect(Collectors.toList());
+	}
+
 }
