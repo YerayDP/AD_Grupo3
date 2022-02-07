@@ -81,9 +81,9 @@ public class InscritoServiceImpl implements InscritoService{
 	}
 
 	@Override
-	public List<InscritoModel> empresaFecha(String id, Date d1, Date d2) {
+	public List<Inscrito> empresaFecha(String id, Date d1, Date d2) {
 		return InscritoRepository.empresaFechas(id,d1,d2).stream()
-				.map(c->transform(c)).collect(Collectors.toList());
+				.collect(Collectors.toList());
 	}
 	@Override
 	public List<Inscrito> listInscritos() {

@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -66,20 +66,13 @@ public class InscritosController {
 	}
 	@PreAuthorize("hasRole('ROLE_RRHH')")
 	@GetMapping("/inscritosFecha")
-	public ModelAndView listInscrEmpresa(String d1, String d2) throws ParseException
+	public ModelAndView listInscrEmpresa(Date d1, Date d2) throws ParseException
 	{
-		ModelAndView mav = new ModelAndView("inscritos");
+		ModelAndView mav = new ModelAndView("ListInsFechas");
 		String id= SecurityContextHolder.getContext().getAuthentication().getName();
 		UserModel userM=userService.findStudentMail(id);
-		
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-	    Date parsed = format.parse(d1);
-	    java.sql.Date sql = new java.sql.Date(parsed.getTime());
 	    
-	    Date parsed1 = format.parse(d2);
-	    java.sql.Date sql2 = new java.sql.Date(parsed1.getTime());
-	    
-		mav.addObject("inscritos", inscritoService.empresaFecha(userM.getEmpresa(),sql,sql2));
+		mav.addObject("inscritos", inscritoService.empresaFecha(userM.getEmpresa(),d1,d2));
 		return mav; 
 	}
 	
@@ -103,10 +96,10 @@ public class InscritosController {
 	
 		return mav; 
 	}
-	@GetMapping("/listInscritosCiclo")
+	@GetMapping("/listInscritosCiclosE")
 	public ModelAndView listInscipcionesFechaN()
 	{
-		ModelAndView mav = new ModelAndView("listInsFecha"); 
+		ModelAndView mav = new ModelAndView("ListInsFechas"); 
 		String id= SecurityContextHolder.getContext().getAuthentication().getName();
 		UserModel userM=userService.findStudentMail(id);
 		mav.addObject("inscritos", inscritoService.listInscritosN(userM.getEmpresa()));

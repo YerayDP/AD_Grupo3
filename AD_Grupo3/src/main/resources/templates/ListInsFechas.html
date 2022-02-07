@@ -29,6 +29,25 @@
                 
                 <table class="table table-bordered">
   					<thead class="table-dark">
+  	<form action="#" th:action="@{/inscritos/inscritosFecha}">
+  		<div class="container px-lg-5">			
+  		<label for="start">Fecha inicial:</label>
+
+		<input type=date id="d1" name="d1"
+       value="2022-01-01"
+       min="2022-01-01" max="2999-12-30">
+       <label for="start">Fecha final:</label>
+
+
+
+
+		<input type=date id="d2" name="d2"
+       value="2022-01-02"
+       min="2022-01-02" max="2999-12-31">
+        <input type="submit" class="btn btn-primary">
+       </div>
+      
+      </form>
 		<tr>
 			<th scope="col">ID</th>
 			<th scope="col">Oferta</th>
@@ -40,8 +59,8 @@
 	<tbody th:each="inscrito: ${inscritos}">
 		<tr>
 			<th th:text=${inscrito.id}></th>
-			<th th:text=${inscrito.id_oferta}></th>
-			<th th:text=${inscrito.id_usuario}></th>
+			<th th:text=${inscrito.oferta.titular}></th>
+			<th th:text=${inscrito.usuario.nombre}></th>
 			<th th:text=${inscrito.fecha_inscripcion}></th>
 		</tr>
 	</tbody>
