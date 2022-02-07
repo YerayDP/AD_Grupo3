@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,6 +32,7 @@ import com.example.demo.models.UserModel;
 import com.example.demo.service.CicloService;
 import com.example.demo.service.InscritoService;
 import com.example.demo.service.OfertaService;
+import com.example.demo.service.PdfService;
 import com.example.demo.service.impl.UserService;
 
 @Controller
@@ -51,6 +53,9 @@ public class OfertaController {
 		@Autowired
 		@Qualifier("inscritoService")
 		private InscritoService inscritoService;
+		
+		@Autowired
+		private PdfService pdfService;
 		
 		private static  String OFERTAS_VIEW="ofertas";
 		private static  String FORM="Form_ofertas";
@@ -214,6 +219,14 @@ public class OfertaController {
 			mav.addObject("ofertas", ofertaService.consulta(user.getId()));
 			
 			return mav;
+		}
+		
+		@PreAuthorize("hasRole('ROLE_ADMIN')")
+		@GetMapping("/pdf/{id}")
+		public void pdf(Model model, @PathVariable("id")int id) throws IOException
+		{	
+			Date localDate = java.sql.Date.valueOf(LocalDate.now());
+			pdfService.createPdf(cicloService.transform(cicloService.findCicloById(id)), ofertaService.pdf(cicloService.findCicloById(id),localDate));
 		}
 	
 }

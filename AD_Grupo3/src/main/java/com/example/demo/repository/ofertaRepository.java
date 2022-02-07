@@ -28,6 +28,7 @@ public interface ofertaRepository extends JpaRepository <Oferta, Serializable>{
 	@Query(value="SELECT * FROM oferta o LEFT JOIN inscrito i ON i.id_oferta = o.id WHERE id_oferta IS NULL AND o.cicloid = ?1", nativeQuery = true)
 	List<Oferta> posibles(int id);
 	
-	
+	@Query(value="SELECT * FROM oferta WHERE cicloid=?1 AND fechamax >= ?2 ORDER BY num_candidatos DESC", nativeQuery = true)
+	List<Oferta> pdf(int id, Date fecha);
 	
 }
