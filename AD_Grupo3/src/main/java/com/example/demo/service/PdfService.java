@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,23 +18,30 @@ import com.example.demo.models.OfertaModel;
 
 @Service
 public class PdfService {
-	
+
 	@Autowired
 	private TemplateEngine templateEngine;
-	
-	public void createPdf(CicloModel ciclo, List<OfertaModel> ofertas) throws IOException
-	{
+
+	public void createPdf(CicloModel ciclo, List<OfertaModel> ofertas) throws IOException {
+
+		try {
+			Runtime.getRuntime()
+					.exec("rundll32 url.dll,FileProtocolHandler " + new File("ofertas.pdf").getAbsolutePath());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		Context context = new Context();
 		context.setVariable("nombre", ciclo.getNombre());
 		context.setVariable("tipo", ciclo.getTipo());
 		context.setVariable("ofertas", ofertas);
-		String processHtml = templateEngine.process("helloworld",context);
-		
+		String processHtml = templateEngine.process("helloworld", context);
+
 		OutputStream outputStream = new FileOutputStream("ofertas.pdf");
 		ITextRenderer renderer = new ITextRenderer();
 		renderer.setDocumentFromString(processHtml);
 		renderer.layout();
-		renderer.createPDF(outputStream,false);
+		renderer.createPDF(outputStream, false);
 		renderer.finishPDF();
 		outputStream.close();
 	}
