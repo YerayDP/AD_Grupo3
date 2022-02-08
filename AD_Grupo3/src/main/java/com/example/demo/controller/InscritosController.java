@@ -72,7 +72,7 @@ public class InscritosController {
 		String id= SecurityContextHolder.getContext().getAuthentication().getName();
 		UserModel userM=userService.findStudentMail(id);
 	    
-		mav.addObject("inscritos", inscritoService.empresaFecha(userM.getEmpresa(),d1,d2));
+		mav.addObject("inscritos", inscritoService.empresaFecha(userM.getId(),d1,d2));
 		return mav; 
 	}
 	
@@ -102,7 +102,7 @@ public class InscritosController {
 		ModelAndView mav = new ModelAndView("ListInsFechas"); 
 		String id= SecurityContextHolder.getContext().getAuthentication().getName();
 		UserModel userM=userService.findStudentMail(id);
-		mav.addObject("inscritos", inscritoService.listInscritosN(userM.getEmpresa()));
+		mav.addObject("inscritos", inscritoService.listInscritosN(userM.getId()));
 	
 		return mav; 
 	}

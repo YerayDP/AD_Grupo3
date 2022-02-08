@@ -18,11 +18,11 @@ public interface InscritoService {
 	List <InscritoModel> findByUsuario(User user);
 	List <InscritoModel> findByCiclo(Ciclo ciclo);
 	List<Inscrito> inscritos(Ciclo ciclo);
-	List <Inscrito> empresaFecha(String id, Date d1, Date d2);
+	List <Inscrito> empresaFecha(int id, Date d1, Date d2);
 	Inscrito transform(InscritoModel Inscritomodel);
 	List<Inscrito> listInscritos();
 
-	List<Inscrito> listInscritosN(String id);
+	List<Inscrito> listInscritosN(int id);
 	
 	
 }

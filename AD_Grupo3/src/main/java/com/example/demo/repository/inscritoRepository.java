@@ -23,11 +23,9 @@ public interface inscritoRepository extends JpaRepository <Inscrito, Serializabl
 	@Query(value="SELECT * FROM inscrito i, user u, oferta o, ciclo c WHERE i.id_usuario = u.id AND"
 			+ " id_oferta = o.id AND u.cicloid = c.id AND c.id = ?1", nativeQuery = true)
 	List<Inscrito> inscritos(Ciclo ciclo);
-	@Query(value="SELECT * FROM inscrito i, user u, oferta o WHERE i.id_usuario = u.id AND"
-			+ " id_oferta = o.id AND u.empresa = ?1 AND i.fecha_inscripcion BETWEEN ?2 AND ?3", nativeQuery = true)
-	List<Inscrito> empresaFechas(String empresa, Date d1, Date d2);
-	@Query(value="SELECT * FROM inscrito i, user u, oferta o WHERE i.id_usuario = u.id AND"
-			+ " id_oferta = o.id AND u.empresa = ?1", nativeQuery = true)
-	List<Inscrito> empresaFechasN(String empresa);
+	@Query(value="SELECT * FROM inscrito i, user u, oferta o WHERE u.id = ?1 AND u.id=o.usuario_id AND o.id = i.id_oferta AND i.fecha_inscripcion BETWEEN ?2 AND ?3", nativeQuery = true)
+	List<Inscrito> empresaFechas(int id, Date d1, Date d2);
+	@Query(value="SELECT * FROM inscrito i, user u, oferta o WHERE u.id = ?1 AND u.id=o.usuario_id AND o.id = i.id_oferta", nativeQuery = true)
+	List<Inscrito> empresaFechasN(int id);
 }
  

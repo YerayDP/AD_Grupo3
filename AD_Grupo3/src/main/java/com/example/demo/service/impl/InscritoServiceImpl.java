@@ -81,7 +81,7 @@ public class InscritoServiceImpl implements InscritoService{
 	}
 
 	@Override
-	public List<Inscrito> empresaFecha(String id, Date d1, Date d2) {
+	public List<Inscrito> empresaFecha(int id, Date d1, Date d2) {
 		return InscritoRepository.empresaFechas(id,d1,d2).stream()
 				.collect(Collectors.toList());
 	}
@@ -93,7 +93,7 @@ public class InscritoServiceImpl implements InscritoService{
 	}
 
 	@Override
-	public List<Inscrito> listInscritosN(String id) {
+	public List<Inscrito> listInscritosN(int id) {
 		return InscritoRepository.empresaFechasN(id).stream()
 				.collect(Collectors.toList());
 	}
