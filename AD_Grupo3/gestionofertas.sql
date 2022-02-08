@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-01-2022 a las 18:31:28
--- Versión del servidor: 10.4.17-MariaDB
--- Versión de PHP: 7.3.26
+-- Tiempo de generación: 08-02-2022 a las 09:36:14
+-- Versión del servidor: 10.4.21-MariaDB
+-- Versión de PHP: 7.4.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,8 +38,8 @@ CREATE TABLE `ciclo` (
 --
 
 INSERT INTO `ciclo` (`id`, `nombre`, `tipo`) VALUES
-(1, 'DAM', 'POR'),
-(2, 'DAS', 'HUY');
+(1, 'CICLODAM', 'ESTUDIOS'),
+(2, 'CICLODAS', '12');
 
 -- --------------------------------------------------------
 
@@ -56,7 +56,7 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(16);
+(27);
 
 -- --------------------------------------------------------
 
@@ -76,7 +76,10 @@ CREATE TABLE `inscrito` (
 --
 
 INSERT INTO `inscrito` (`id`, `fecha_inscripcion`, `id_oferta`, `id_usuario`) VALUES
-(15, '2022-01-24', 1, 1);
+(1, '2022-02-18', 0, 1),
+(2, '2022-01-15', 1, 1),
+(3, '2022-01-20', 4, 1),
+(4, '2022-01-22', 5, 16);
 
 -- --------------------------------------------------------
 
@@ -97,8 +100,9 @@ CREATE TABLE `noticia` (
 --
 
 INSERT INTO `noticia` (`id`, `descripcion`, `imagen`, `titulo`, `ciclo_id`) VALUES
-(12, 'ODOO acaba sus servicios', 'Qué-aporta-Odoo-a-mi-negocio.jpg', 'ODOO CIERRA', 1),
-(13, 'T', 'SRVR.jpg', 'T', 2);
+(22, 'Calculadora 1', 'calculator.PNG', 'Calculadora', 1),
+(23, 'Calculadora 2', 'calculator.PNG', 'Calculadora', 1),
+(24, 'Calculadora 3', 'calculator.PNG', 'Calculadora', NULL);
 
 -- --------------------------------------------------------
 
@@ -113,17 +117,20 @@ CREATE TABLE `oferta` (
   `num_candidatos` int(11) NOT NULL,
   `requisitos` varchar(255) DEFAULT NULL,
   `titular` varchar(255) DEFAULT NULL,
-  `cicloid` int(11) DEFAULT NULL,
-  `usuario_id` bigint(20) DEFAULT NULL
+  `usuario_id` bigint(20) DEFAULT NULL,
+  `cicloid` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `oferta`
 --
 
-INSERT INTO `oferta` (`id`, `descripcion`, `fechamax`, `num_candidatos`, `requisitos`, `titular`, `cicloid`, `usuario_id`) VALUES
-(1, 'Noticia 1', '2022-01-06', 123, 'Cursar DAM', 'Oferta Laravel', 1, 3),
-(14, 'Trabajo IONIC', '2022-01-31', 211, 'Cursar DAM', 'Oferta IONIC', 1, 1);
+INSERT INTO `oferta` (`id`, `descripcion`, `fechamax`, `num_candidatos`, `requisitos`, `titular`, `usuario_id`, `cicloid`) VALUES
+(0, 'ES', '2022-02-05', 3, 'ES', 'ES', 14, 1),
+(1, 'qwerty', '2022-01-18', 123, 'ASDFG', 'TYUIO', 15, 2),
+(3, 'OF1', '2022-02-09', 123, 'Cursar informática', 'Oferta informático', 15, 2),
+(4, 'OF2', '2022-02-09', 123, 'Cursar informática 2', 'Oferta informático 2', 15, 2),
+(5, 'OF3', '2022-02-09', 123, 'Cursar informática 3', 'Oferta informático 3', 14, 1);
 
 -- --------------------------------------------------------
 
@@ -134,13 +141,13 @@ INSERT INTO `oferta` (`id`, `descripcion`, `fechamax`, `num_candidatos`, `requis
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL,
   `activo` bit(1) DEFAULT NULL,
-  `apellidos` varchar(255) NOT NULL,
+  `apellidos` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `empresa` varchar(255) DEFAULT NULL,
-  `nombre` varchar(255) NOT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `role` varchar(255) DEFAULT NULL,
-  `telefono` varchar(9) NOT NULL,
+  `telefono` varchar(9) DEFAULT NULL,
   `cicloid` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
@@ -149,9 +156,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `activo`, `apellidos`, `email`, `empresa`, `nombre`, `password`, `role`, `telefono`, `cicloid`) VALUES
-(1, b'1', 'DP', 'Yerayd99@gmail.com', 'DAM', 'Y', '$2a$10$CWQP4osRNfBJVgOl4Y3Omu6TRBoSEwatO4fPbxGU38b5xeW1AdzIS', 'ROLE_ALUMNO', '9090909', 1),
-(3, b'1', 'DM', 'Pablo@gmail.com', 'DAM', 'P', '$2a$10$CWQP4osRNfBJVgOl4Y3Omu6TRBoSEwatO4fPbxGU38b5xeW1AdzIS', 'ROLE_RRHH', '989898989', 1),
-(4, b'1', 'ADMIN', 'admin@admin.com', 'ADMIN', 'ADMIN', '$2a$10$CWQP4osRNfBJVgOl4Y3Omu6TRBoSEwatO4fPbxGU38b5xeW1AdzIS', 'ROLE_ADMIN', '9090909', 1);
+(3, b'1', 'ADMIN', 'admin@admin.com', 'DAM', 'Admin', '$2a$10$SW./P.d4WAEAKQ4F/p3WseBGN9XUo/ECi1q9.RGhOqBCEhod6y3BG', 'ROLE_ADMIN', '123456789', 1),
+(15, b'1', 'Pavón2', 'yerayd992@gmail.com', 'DAS', 'Yeray2', '$2a$10$drSDenwGrwU1Ml3vmQOhpu05fGJi4hy01aUtqCdNarzVa0daZKxL.', 'ROLE_RRHH', '690647914', 1),
+(14, b'1', 'Pavón', 'yerayd99@gmail.com', 'DAS', 'Yeray', '$2a$10$drSDenwGrwU1Ml3vmQOhpu05fGJi4hy01aUtqCdNarzVa0daZKxL.', 'ROLE_RRHH', '690647914', 1),
+(1, b'1', 'DP', 'Yerayd@gmail.com', 'DAW', 'Y', '$2a$10$drSDenwGrwU1Ml3vmQOhpu05fGJi4hy01aUtqCdNarzVa0daZKxL.', 'ROLE_ALUMNO', '090909', 1),
+(16, b'1', 'DP2', 'Yeray2d@gmail.com', 'DAW', 'Y2', '$2a$10$drSDenwGrwU1Ml3vmQOhpu05fGJi4hy01aUtqCdNarzVa0daZKxL.', 'ROLE_ALUMNO', '090909', 1);
 
 --
 -- Índices para tablas volcadas

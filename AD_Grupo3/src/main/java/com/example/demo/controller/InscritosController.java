@@ -96,6 +96,7 @@ public class InscritosController {
 	
 		return mav; 
 	}
+	@PreAuthorize("hasRole('ROLE_RRHH')")
 	@GetMapping("/listInscritosCiclosE")
 	public ModelAndView listInscipcionesFechaN()
 	{
