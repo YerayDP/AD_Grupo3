@@ -30,3 +30,4 @@ public interface inscritoRepository extends JpaRepository <Inscrito, Serializabl
 			+ " id_oferta = o.id AND u.empresa = ?1", nativeQuery = true)
 	List<Inscrito> empresaFechasN(String empresa);
 }
+ 
