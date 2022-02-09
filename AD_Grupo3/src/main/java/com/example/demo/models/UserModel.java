@@ -15,7 +15,7 @@ public class UserModel {
 	private String role;
 	private boolean activo;
 	private Ciclo ciclo;
-
+	private String token;
 	
 
 	public UserModel() {
@@ -115,6 +115,12 @@ public class UserModel {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 }

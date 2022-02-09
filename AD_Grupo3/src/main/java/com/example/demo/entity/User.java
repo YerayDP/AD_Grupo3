@@ -46,6 +46,9 @@ public class User {
 	@Column(nullable=true)
 	private String empresa;
 	
+	@Column(name="token")
+	private String token;
+	
 	@Column(nullable=true)
 	private boolean activo;
 	
@@ -177,6 +180,13 @@ public class User {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 	
 }

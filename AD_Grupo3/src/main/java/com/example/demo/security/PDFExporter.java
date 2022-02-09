@@ -1,4 +1,4 @@
-package com.example.demo.seguridad;
+package com.example.demo.security;
 
 import java.util.List;
 
