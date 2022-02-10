@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -15,6 +14,7 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import com.example.demo.models.CicloModel;
 import com.example.demo.models.OfertaModel;
+import com.lowagie.text.DocumentException;
 
 @Service
 public class PdfService {
@@ -22,7 +22,7 @@ public class PdfService {
 	@Autowired
 	private TemplateEngine templateEngine;
 
-	public void createPdf(CicloModel ciclo, List<OfertaModel> ofertas) throws IOException {
+	public void createPdf(CicloModel ciclo, List<OfertaModel> ofertas) throws IOException, DocumentException {
 
 
 		Context context = new Context();

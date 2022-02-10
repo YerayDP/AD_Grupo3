@@ -34,6 +34,7 @@ import com.example.demo.service.InscritoService;
 import com.example.demo.service.OfertaService;
 import com.example.demo.service.PdfService;
 import com.example.demo.service.impl.UserService;
+import com.lowagie.text.DocumentException;
 
 @Controller
 @RequestMapping("/ofertas")
@@ -223,7 +224,7 @@ public class OfertaController {
 		
 		@PreAuthorize("hasRole('ROLE_ADMIN')")
 		@GetMapping("/pdf/{id}")
-		public String pdf(Model model, @PathVariable("id")int id) throws IOException
+		public String pdf(Model model, @PathVariable("id")int id) throws IOException, DocumentException
 		{	
 			Date localDate = java.sql.Date.valueOf(LocalDate.now());
 			pdfService.createPdf(cicloService.transform(cicloService.findCicloById(id)), ofertaService.pdf(cicloService.findCicloById(id),localDate));
