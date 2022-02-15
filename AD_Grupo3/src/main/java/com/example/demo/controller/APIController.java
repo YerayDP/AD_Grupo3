@@ -59,8 +59,7 @@ public class APIController {
 			if(this.Token != null)
 			{
 				System.out.println("token");
-				String mail = SecurityContextHolder.getContext().getAuthentication().getName();
-				UserModel user = userService.findStudentMail(mail);
+				UserModel user = userService.Token(Token);
 				return inscritoService.InscritoHistorial(user.getId());
 			}
 			else
