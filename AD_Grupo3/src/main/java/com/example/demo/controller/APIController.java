@@ -60,8 +60,8 @@ public class APIController {
 			{
 				System.out.println("token");
 				User user = userService.Token(Token);
-				System.out.println(user.getId());
-				return inscritoService.InscritoHistorial(user.getId());
+				System.out.println(user);
+				return inscritoService.InscritoHistorial(3);
 			}
 			else
 			{

@@ -15,6 +15,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 
@@ -52,13 +54,16 @@ public class User {
 	@Column(nullable=true)
 	private boolean activo;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="usuario", orphanRemoval=true)
 	private List<Oferta> ofertas = new ArrayList<>();
 	
+	@JsonIgnore
 	@ManyToOne 
 	@JoinColumn(name="CicloID")
 	private Ciclo ciclo;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="usuario", orphanRemoval=true)
 	private List<Inscrito>inscritos = new ArrayList<>();
 

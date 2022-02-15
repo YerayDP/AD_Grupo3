@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Oferta {
 
@@ -24,14 +26,18 @@ public class Oferta {
 	private String requisitos;
 	private Date fechamax;
 	private int numCandidatos;
+	
+	@JsonIgnore
 	@ManyToOne 
 	@JoinColumn(name="usuarioId")
 	private User usuario;
 	
+	@JsonIgnore
 	@ManyToOne 
 	@JoinColumn(name="CicloID")
 	private Ciclo ciclo;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="oferta", orphanRemoval=true)
 	private List<Inscrito>inscritos = new ArrayList<>();
 	

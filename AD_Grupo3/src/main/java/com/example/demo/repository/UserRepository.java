@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.entity.Oferta;
 import com.example.demo.entity.User;
+import com.example.demo.models.UserModel;
 
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository <User, Serializable>{
@@ -21,6 +23,8 @@ public interface UserRepository extends JpaRepository <User, Serializable>{
 
 	@Query(value="SELECT * FROM User u, Oferta o, Inscrito i WHERE i.id_usuario = u.id AND o.id = i.id_oferta AND o.id = ?1", nativeQuery = true)
 	List<User> alumnos(int id);
+
+	
 	
 }
  
