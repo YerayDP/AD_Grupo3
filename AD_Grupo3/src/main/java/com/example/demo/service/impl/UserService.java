@@ -124,6 +124,8 @@ public class UserService implements UserDetailsService{
 				.map(c->transform(c)).collect(Collectors.toList());
 	}
 	
-	
+	public List<User> Token(String token) {
+		return userRepository.findByToken(token);
+	}
 	
 }

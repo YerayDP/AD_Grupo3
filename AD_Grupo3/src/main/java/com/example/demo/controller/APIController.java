@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.Inscrito;
 import com.example.demo.entity.User;
 import com.example.demo.models.InscritoModel;
 import com.example.demo.models.UserModel;
@@ -42,7 +43,8 @@ public class APIController {
 		@Autowired
 		private AuthenticationManager authenticationManager;
 	
-	
+		private String Token;
+		
 		@Autowired
 		@Qualifier("inscritoService")
 		private InscritoService inscritoService;
@@ -53,8 +55,19 @@ public class APIController {
 		
 		
 		@GetMapping("/listInscritos")
-		public List<InscritoModel> listarInscrito(@RequestHeader String token){
-			return inscritoService.listAllInscritos();
+		public List<Inscrito> listarInscrito(){
+			if(this.Token != null)
+			{
+				System.out.println("token");
+				String mail = SecurityContextHolder.getContext().getAuthentication().getName();
+				UserModel user = userService.findStudentMail(mail);
+				return inscritoService.InscritoHistorial(user.getId());
+			}
+			else
+			{
+				System.out.println("No token");
+				return null;
+			}
 		}
 		
 		@PostMapping("/login")
@@ -68,6 +81,7 @@ public class APIController {
 			u = userService.transform(userService.findStudentMail(user.getEmail()));
 			u.setToken(token);
 			System.out.println("Token "+u.getToken());
+			this.Token=u.getToken();
 			System.out.println(u.getRole());
 			System.out.println(u.getEmail());
 			System.out.println(u.getPassword());
