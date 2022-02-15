@@ -99,7 +99,7 @@ public class InscritoServiceImpl implements InscritoService{
 	}
 
 	@Override
-	public List<Inscrito> InscritoHistorial(int id) {
+	public List<Inscrito> InscritoHistorial(long id) {
 		return InscritoRepository.InscritoHistorial(id).stream()
 				.collect(Collectors.toList());
 	}

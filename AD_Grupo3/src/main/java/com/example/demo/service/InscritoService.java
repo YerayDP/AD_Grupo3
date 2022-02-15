@@ -21,7 +21,7 @@ public interface InscritoService {
 	List <Inscrito> empresaFecha(int id, Date d1, Date d2);
 	Inscrito transform(InscritoModel Inscritomodel);
 	List<Inscrito> listInscritos();
-	List<Inscrito> InscritoHistorial(int id);
+	List<Inscrito> InscritoHistorial(long id);
 	List<Inscrito> listInscritosN(int id);
 	
 	

@@ -59,7 +59,7 @@ public class APIController {
 			if(this.Token != null)
 			{
 				System.out.println("token");
-				UserModel user = userService.Token(Token);
+				User user = userService.Token(Token);
 				System.out.println(user.getId());
 				return inscritoService.InscritoHistorial(user.getId());
 			}
