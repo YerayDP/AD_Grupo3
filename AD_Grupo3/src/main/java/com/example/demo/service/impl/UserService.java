@@ -126,6 +126,7 @@ public class UserService implements UserDetailsService{
 	
 	public com.example.demo.entity.User Token(String token) {
 		return userRepository.findByToken(token);
+
 	}
 	
 }

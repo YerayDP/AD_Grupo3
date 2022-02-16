@@ -44,6 +44,7 @@ public class APIController {
 		private AuthenticationManager authenticationManager;
 	
 		private String Token;
+		private String email;
 		
 		@Autowired
 		@Qualifier("inscritoService")
@@ -58,10 +59,10 @@ public class APIController {
 		public List<Inscrito> listarInscrito(){
 			if(this.Token != null)
 			{
-				System.out.println("token");
-				User user = userService.Token(Token);
+				
+				UserModel user = userService.findStudentMail(email);
 				System.out.println(user);
-				return inscritoService.InscritoHistorial(3);
+				return inscritoService.InscritoHistorial(user.getId());
 			}
 			else
 			{
@@ -82,9 +83,11 @@ public class APIController {
 			u.setToken(token);
 			System.out.println("Token "+u.getToken());
 			this.Token=u.getToken();
+			this.email=u.getEmail();
 			System.out.println(u.getRole());
 			System.out.println(u.getEmail());
 			System.out.println(u.getPassword());
+			System.out.println(u.getToken());
 			return u;
 		}
 		private String getJWTToken(String username) {
