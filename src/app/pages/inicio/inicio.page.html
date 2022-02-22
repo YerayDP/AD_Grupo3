@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Gestion ofertas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-card *ngFor="let oferta of ofertas">
+      <ion-card-header>
+        <ion-card-title><strong>Titulo : {{oferta.oferta['titular']}}</strong></ion-card-title>
+        <ion-card-subtitle>Descripcion : {{oferta.oferta['descripcion']}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Requisitos : {{oferta.oferta['requisitos']}}</p>
+        <p>Fecha de expiracion : {{oferta.oferta['fechamax']}}</p>
+      </ion-card-content>
+      </ion-card>
+  </ion-list>
+
+</ion-content>
