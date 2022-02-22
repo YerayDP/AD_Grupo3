@@ -84,8 +84,7 @@ public class OfertaServiceImpl implements OfertaService{
 
 	@Override
 	public List<OfertaModel> findById(int id) {
-		return OfertaRepository.findById(id).stream()
-				.map(c->transform(c)).collect(Collectors.toList());
+		return null;
 	}
 
 
