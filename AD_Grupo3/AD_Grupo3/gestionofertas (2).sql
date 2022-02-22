@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-02-2022 a las 09:36:14
+-- Tiempo de generación: 22-02-2022 a las 22:11:36
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.4.23
 
@@ -56,7 +56,7 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(27);
+(28);
 
 -- --------------------------------------------------------
 
@@ -77,9 +77,10 @@ CREATE TABLE `inscrito` (
 
 INSERT INTO `inscrito` (`id`, `fecha_inscripcion`, `id_oferta`, `id_usuario`) VALUES
 (1, '2022-02-18', 0, 1),
-(2, '2022-01-15', 1, 1),
+(2, '2022-01-14', 1, 1),
 (3, '2022-01-20', 4, 1),
-(4, '2022-01-22', 5, 16);
+(4, '2022-01-22', 5, 16),
+(27, '2022-02-22', 3, 16);
 
 -- --------------------------------------------------------
 
@@ -102,7 +103,7 @@ CREATE TABLE `noticia` (
 INSERT INTO `noticia` (`id`, `descripcion`, `imagen`, `titulo`, `ciclo_id`) VALUES
 (22, 'Calculadora 1', 'calculator.PNG', 'Calculadora', 1),
 (23, 'Calculadora 2', 'calculator.PNG', 'Calculadora', 1),
-(24, 'Calculadora 3', 'calculator.PNG', 'Calculadora', NULL);
+(24, 'Calculadora 3', 'calculator.PNG', 'Calculadora', 1);
 
 -- --------------------------------------------------------
 
@@ -126,8 +127,8 @@ CREATE TABLE `oferta` (
 --
 
 INSERT INTO `oferta` (`id`, `descripcion`, `fechamax`, `num_candidatos`, `requisitos`, `titular`, `usuario_id`, `cicloid`) VALUES
-(0, 'ES', '2022-02-05', 3, 'ES', 'ES', 14, 1),
-(1, 'qwerty', '2022-01-18', 123, 'ASDFG', 'TYUIO', 15, 2),
+(0, 'Oferta odoo para principiantes', '2022-02-05', 3, 'ODOO', 'Oferta ODOO', 14, 1),
+(1, 'Oferta spring para expertos', '2022-06-18', 123, 'Spring', 'Oferta Spring EXP', 15, 2),
 (3, 'OF1', '2022-02-09', 123, 'Cursar informática', 'Oferta informático', 15, 2),
 (4, 'OF2', '2022-02-09', 123, 'Cursar informática 2', 'Oferta informático 2', 15, 2),
 (5, 'OF3', '2022-02-09', 123, 'Cursar informática 3', 'Oferta informático 3', 14, 1);
@@ -148,19 +149,20 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL,
   `role` varchar(255) DEFAULT NULL,
   `telefono` varchar(9) DEFAULT NULL,
-  `cicloid` int(11) DEFAULT NULL
+  `cicloid` int(11) DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `user`
 --
 
-INSERT INTO `user` (`id`, `activo`, `apellidos`, `email`, `empresa`, `nombre`, `password`, `role`, `telefono`, `cicloid`) VALUES
-(3, b'1', 'ADMIN', 'admin@admin.com', 'DAM', 'Admin', '$2a$10$SW./P.d4WAEAKQ4F/p3WseBGN9XUo/ECi1q9.RGhOqBCEhod6y3BG', 'ROLE_ADMIN', '123456789', 1),
-(15, b'1', 'Pavón2', 'yerayd992@gmail.com', 'DAS', 'Yeray2', '$2a$10$drSDenwGrwU1Ml3vmQOhpu05fGJi4hy01aUtqCdNarzVa0daZKxL.', 'ROLE_RRHH', '690647914', 1),
-(14, b'1', 'Pavón', 'yerayd99@gmail.com', 'DAS', 'Yeray', '$2a$10$drSDenwGrwU1Ml3vmQOhpu05fGJi4hy01aUtqCdNarzVa0daZKxL.', 'ROLE_RRHH', '690647914', 1),
-(1, b'1', 'DP', 'Yerayd@gmail.com', 'DAW', 'Y', '$2a$10$drSDenwGrwU1Ml3vmQOhpu05fGJi4hy01aUtqCdNarzVa0daZKxL.', 'ROLE_ALUMNO', '090909', 1),
-(16, b'1', 'DP2', 'Yeray2d@gmail.com', 'DAW', 'Y2', '$2a$10$drSDenwGrwU1Ml3vmQOhpu05fGJi4hy01aUtqCdNarzVa0daZKxL.', 'ROLE_ALUMNO', '090909', 1);
+INSERT INTO `user` (`id`, `activo`, `apellidos`, `email`, `empresa`, `nombre`, `password`, `role`, `telefono`, `cicloid`, `token`) VALUES
+(3, b'1', 'ADMIN', 'admin@admin.com', 'DAM', 'Admin', '$2a$10$SW./P.d4WAEAKQ4F/p3WseBGN9XUo/ECi1q9.RGhOqBCEhod6y3BG', 'ROLE_ADMIN', '123456789', 1, NULL),
+(15, b'1', 'Pavón2', 'RRHH@gmail.com', 'DAS', 'Yeray2', '$2a$10$drSDenwGrwU1Ml3vmQOhpu05fGJi4hy01aUtqCdNarzVa0daZKxL.', 'ROLE_RRHH', '690647914', 1, NULL),
+(14, b'1', 'Pavón', 'RRHH2@gmail.com', 'DAS', 'Yeray', '$2a$10$drSDenwGrwU1Ml3vmQOhpu05fGJi4hy01aUtqCdNarzVa0daZKxL.', 'ROLE_RRHH', '690647914', 1, NULL),
+(1, b'1', 'DP', 'Cliente@gmail.com', 'DAW', 'Y', '$2a$10$drSDenwGrwU1Ml3vmQOhpu05fGJi4hy01aUtqCdNarzVa0daZKxL.', 'ROLE_ALUMNO', '090909', 1, NULL),
+(16, b'1', 'DP2', 'Cliente2@gmail.com', 'DAW', 'Y2', '$2a$10$drSDenwGrwU1Ml3vmQOhpu05fGJi4hy01aUtqCdNarzVa0daZKxL.', 'ROLE_ALUMNO', '090909', 1, NULL);
 
 --
 -- Índices para tablas volcadas
